@@ -24,20 +24,19 @@ export const AuthProvider = ({ children }) => {
 
     // Ye function new user ko register karne ke liye POST request bhejta hai
     const handleRegister = async (name, username, password) => {
-        try {
-            let request = await client.post("/register", {
-                name,
-                username,
-                password
-            });
-    
-            if (request.status === httpStatus.CREATED) {
-                return request; // ✅ Return full response object
-            }
-        } catch (err) {
-            throw err;
-        }
-    };
+    try {
+        let request = await client.post("/register", {
+            name,
+            username,
+            password
+        });
+
+        return request.data; // ✅ Always return something
+    } catch (err) {
+        throw err;
+    }
+};
+
     
 
     // Ye function user ko login karne ke liye use hota hai
