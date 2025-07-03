@@ -5,7 +5,14 @@ let messages={};
 let timeOnline={};
 
 export const connectToSocket=(server)=>{
-    const io=new Server(server);
+    const io=new Server(server,{
+        cors:{ //This is important because WebSocket connections often come from frontend apps (e.g., localhost:3000) while the backend runs on another port (e.g., localhost:5000).
+            origin:"*",
+            methods:["Get","POST"],
+            allowedHeaders:["*"],
+            credentials:true
+        }
+    });
 
     io.on("connection",(socket)=>{
 
