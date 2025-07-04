@@ -32,12 +32,18 @@
     gap: 10px;
 }
 
-.conferenceView  video {
-    width: 40vw;
-    height: 20vh;
-    min-width: 30vw;
+.conferenceView video {
+    position: absolute;
+    left: 0;
+    top: 10vh; /* adjust as needed */
+    width: 70vw;
+    height: 60vh;
+    min-width: 50vw;
     border-radius: 10px;
 }
+
+
+
 
 .chatRoom {
     position: absolute;
