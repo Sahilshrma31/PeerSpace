@@ -1,12 +1,10 @@
 .landingPageContainer {
-    width: 100vw;
-    height: 100vh;
-    background: url("/public/background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
-  }
-  
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b); /* slate/dark blue */
+  color: white;
+  padding: 20px;
+}
+
   .landingPageContainer nav {
     padding-inline: 1.2rem;
     padding-block: 1.6rem;
@@ -41,7 +39,7 @@
   }
   
   .landingMainContainer>div:nth-child(1) div[role='button'] {
-    background: #D97500;
+    background: none;
     width: fit-content;
     padding: 1rem;
     border-radius: 20px;
