@@ -26,6 +26,7 @@ app.get("/home",(req,res)=>{
 });
 
 const start=async()=>{
+    app.set("mongo_user")
     const connectionDb = await mongoose.connect("mongodb+srv://sahilsharma3184:sahils6693@cluster0.tcxscee.mongodb.net/peerspace?retryWrites=true&w=majority");
 
     console.log(`Mongo connected db host: ${connectionDb.connection.host}`);
