@@ -96,5 +96,24 @@ Follow these simple steps to run the app locally:
 
 ---
 
-## 📂 Folder Structure
+
+---
+
+## 🧑‍💻 Author
+
+- **Sahil Sharma**  
+  [GitHub](https://github.com/Sahilshrma31) · [LinkedIn](https://linkedin.com/in/sahilshrma31)
+
+---
+
+## 📌 Note
+
+> This app is currently meant for **local usage or custom deployment**.
+> Production-ready WebRTC deployments require:
+> - HTTPS (via custom domain)
+> - STUN/TURN servers for NAT traversal
+
+---
+
+
 
