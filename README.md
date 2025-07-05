@@ -98,5 +98,7 @@ http://localhost:3000
 ## Author
 👨‍💻 Developed by [Sahil Sharma]
 (https://github.com/Sahilshrma31)
+
 🎓 B.Tech in Electronics and Communication Engineering, NIT Hamirpur
+
 - 🔗 [LinkedIn](https://linkedin.com/in/sahilshrma31)
