@@ -1,126 +1,172 @@
 <h1 align="center">👥 PeerSpace</h1>
 
 <p align="center">
-  <b>A Real-Time WebRTC Video Conferencing App</b><br/>
-  Built with MERN Stack, WebRTC, Socket.IO & Material UI
+  <b>A Real-Time 1-on-1 Video Calling App</b><br/>
+  Built with MERN Stack, WebRTC, and Socket.IO
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/WebRTC-Peer--to--Peer-green" />
+  <img src="https://img.shields.io/badge/WebRTC-Video--Call-blue" />
   <img src="https://img.shields.io/badge/Socket.IO-Realtime-black" />
-  <img src="https://img.shields.io/badge/MaterialUI-Design-blue" />
-  <img src="https://img.shields.io/badge/React-Frontend-lightblue" />
-  <img src="https://img.shields.io/badge/Node.js-Backend-green" />
-  <img src="https://img.shields.io/badge/MongoDB-Database-success" />
+  <img src="https://img.shields.io/badge/MERN-Fullstack-green" />
+  <img src="https://img.shields.io/badge/MaterialUI-Styling-blueviolet" />
 </p>
 
 ---
 
 ## 🌐 About the Project
 
-**PeerSpace** is a full-stack, real-time video conferencing web application designed for **1-on-1 peer-to-peer communication** with high performance, privacy, and simplicity in mind.
+**PeerSpace** is a real-time video conferencing application where users can:
 
-Whether you're a student seeking a smooth tutoring session, a professional conducting remote interviews, or someone hosting a casual 1-on-1 video call, PeerSpace offers a seamless, secure, and modern experience.
+- 🔹 Make 1-on-1 **video calls**
+- 🔹 **Join as guest** or with an account
+- 🔹 **Sign up & log in** to track session history
+- 🔹 **Chat simultaneously** during the call
+- 🔹 View **history of past sessions**
+- 🔹 **Share their screen** during a call
 
-### 🔍 Key Highlights
-
-- ✅ **No Sign-Up Needed:** Users can create or join rooms instantly with a room ID or link.
-- 📡 **Peer-to-Peer Connection:** Uses WebRTC for direct, low-latency video/audio without routing through a server.
-- 🔐 **Secure & Private:** Media is exchanged peer-to-peer, reducing risks of interception or eavesdropping.
-- 🖥️ **Modern UI/UX:** Responsive Material UI components offer a clean and intuitive interface.
-- 🌐 **Cross-Browser Support:** Optimized for Chrome, Firefox, and other major browsers supporting WebRTC.
-- 📊 **Efficient Resource Use:** No central video server — the app relies on your browser’s capabilities to manage streams.
-
-### 🎨 UI/UX Design Highlights
-
-| Component              | UI Feature                                                                 |
-|------------------------|----------------------------------------------------------------------------|
-| 🎬 **Landing Page**     | Elegant hero section with animated background, logo, and "Create/Join Room" CTA |
-| 📹 **Call Interface**   | Split screen for local/remote video, floating action buttons (FAB) for mute, end call, screen share |
-| 💬 **Chat Drawer**      | Slide-in chat panel with time-stamped messages, emoji support, and auto-scroll |
-| 🔲 **Screen Share Modal**| Clean overlay UI showing current status and stop sharing option              |
-| 🧾 **Session Summary**  | Post-call modal showing call duration, participants, and optional feedback form |
-| 📱 **Responsive Design**| Fully mobile-compatible experience using Material UI's breakpoints and grid system |
+Everything is built using **MERN**, **WebRTC**, and **Socket.IO**, with a modern UI using **Material UI**.
 
 ---
 
-## 🚀 Live Preview
+## ✨ Core Features
 
-> 🔗 **Watch a Demo:** [YouTube Link](#)
-
-⚠️ *WebRTC requires `localhost` or HTTPS for video/audio to function properly.*
+| Feature             | Description                                                   |
+|---------------------|---------------------------------------------------------------|
+| 🎥 Video Call        | 1-on-1 peer-to-peer video/audio using WebRTC                 |
+| 🚪 Join as Guest     | No account required to join a room                           |
+| 🔐 Sign In / Sign Up | Users can register and login to view their session history   |
+| 💬 Chat             | Real-time chat while on call                                  |
+| 🧾 Call History      | Authenticated users can view past sessions they've attended  |
+| 🖥 Screen Share      | Share your screen during the call seamlessly                  |
 
 ---
 
 ## 🧱 Tech Stack
 
-| Layer         | Tech                  | Description                                   |
-|---------------|-----------------------|-----------------------------------------------|
-| 💻 Frontend   | React.js              | Component-based SPA                           |
-| 🎨 UI Design  | Material UI           | Modern design system for styling              |
-| 🌐 Backend    | Node.js, Express.js   | REST API & WebRTC signaling                   |
-| 🧠 Realtime   | Socket.IO             | Bi-directional events for chat & signaling    |
-| 📡 WebRTC     | Browser API           | Handles P2P video/audio/screen-sharing        |
-| 🗄 Database    | MongoDB + Mongoose    | Stores sessions, messages, and room data      |
-
----
-
-## ✨ Features Overview
-
-| Feature              | Description                                                                                       | Implementation Details                                                                                   |
-|----------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| 🎥 Video Calling     | Peer-to-peer HD video & audio                                                                     | WebRTC APIs: `getUserMedia()`, `RTCPeerConnection`, ICE candidates, SDP                                  |
-| 💬 Chat              | Realtime messaging in each room                                                                   | Powered by Socket.IO with timestamped messages                                                           |
-| 🖥 Screen Sharing     | Share screen during video calls                                                                   | Uses `getDisplayMedia()` + renegotiation of media tracks                                                 |
-| 🕒 Session History   | Track past sessions and metadata                                                                  | MongoDB stores room info, time, users                                                                    |
-| 🚪 Guest Access      | No login needed to join a meeting                                                                 | Frontend generates temp guest profiles and sends to backend                                              |
-| 🧑‍🎨 UI/UX            | Modern and responsive interface                                                                    | Built using Material UI components and custom styles                                                     |
+| Layer       | Technology                  |
+|-------------|-----------------------------|
+| Frontend    | React.js, Material UI       |
+| Backend     | Node.js, Express.js         |
+| Database    | MongoDB + Mongoose          |
+| Realtime    | WebRTC + Socket.IO          |
 
 ---
 
 ## ⚙️ Getting Started
 
-Follow these simple steps to run the app locally:
+Follow these steps
+You said:
+<p align="center">
+  <img src="https://img.shields.io/badge/WebRTC-Video--Call-blue" />
+  <img src="https://img.shields.io/badge/Socket.IO-Realtime-black" />
+  <img src="https://img.shields.io/badge/MERN-Fullstack-green" />
+  <img src="https://img.shields.io/badge/MaterialUI-Styling-blueviolet" />
+</p> dont add this 
+ChatGPT said:
+Perfect! Here's your clean and final README.md code without the badge section, strictly based on your specified functionalities:
 
-| 🔧 Step | Command |
-|--------|---------|
-| **1️⃣ Clone the Repo** | ```bash<br>git clone https://github.com/Sahilshrma31/PeerSpace.git<br>cd PeerSpace``` |
-| **2️⃣ Backend Setup** | ```bash<br>cd backend<br>npm install``` |
-| **3️⃣ Frontend Setup** | ```bash<br>cd ../frontend<br>npm install``` |
-| **4️⃣ Environment Variables** | Create a `.env` file inside `/backend`:<br><br>```env<br>MONGO_URI=mongodb://127.0.0.1:27017/peerspace<br>PORT=5000``` |
-| **▶️ Start Backend Server** | ```bash<br>cd backend<br>npm start``` |
-| **▶️ Start Frontend React App** | ```bash<br>cd ../frontend<br>npm start``` |
-| **🌐 View on Browser** | Visit [`http://localhost:3000`](http://localhost:3000) |
+<h1 align="center">👥 PeerSpace</h1>
 
----
-
-## 🧠 How It Works – Under the Hood
-
-| Layer           | Description                                                                 |
-|----------------|-----------------------------------------------------------------------------|
-| **Signaling**   | Users join rooms via Socket.IO. SDP & ICE candidates exchanged in real-time |
-| **P2P Media**   | WebRTC creates direct connection after signaling                            |
-| **Stream Setup**| `getUserMedia()` captures video/audio and attaches to peer connection       |
-| **Screen Share**| `getDisplayMedia()` replaces video track + triggers renegotiation           |
-| **Chat System** | Socket.IO emits messages to all peers with timestamps and user info         |
-| **Database**    | MongoDB stores meeting metadata: room ID, start/end time, optional messages |
+<p align="center">
+  <b>A Real-Time 1-on-1 Video Calling App</b><br/>
+  Built with MERN Stack, WebRTC, and Socket.IO
+</p>
 
 ---
 
-## 🧑‍💻 Author
+## 🌐 About the Project
 
-- **Sahil Sharma**  
-  [GitHub](https://github.com/Sahilshrma31) · [LinkedIn](https://linkedin.com/in/sahilshrma31)
+**PeerSpace** is a secure and efficient real-time video calling platform designed for direct one-on-one communication.
+
+It allows users to:
+- 🎥 Make high-quality **video/audio calls**
+- 🚪 **Join as guest** without account creation
+- 🔐 **Sign up / Sign in** for account-based access
+- 💬 **Chat in real-time** during the video session
+- 🧾 View **session history** after logging in
+- 🖥 **Share screen** during a call
+
+The app uses **WebRTC** for peer-to-peer media connection and **Socket.IO** for real-time signaling and chat. Built with the **MERN stack**, it ensures both performance and scalability with a modern UI experience.
 
 ---
 
-## 📌 Note
+## ✨ Features
 
-> This app is currently meant for **local usage or custom deployment**.  
-> Production-ready WebRTC deployments require:
-> - HTTPS (via custom domain)
-> - STUN/TURN servers for NAT traversal
+| Feature             | Description                                                   |
+|---------------------|---------------------------------------------------------------|
+| 🎥 Video Call        | 1-on-1 peer-to-peer video/audio calling using WebRTC         |
+| 🚪 Join as Guest     | Users can join a call instantly without signing up            |
+| 🔐 Sign In / Sign Up | Registered users can access additional features like history |
+| 💬 Chat              | Real-time messaging during video calls                       |
+| 🧾 Session History   | Logged-in users can view previous meeting details            |
+| 🖥 Screen Sharing     | Share your screen seamlessly during a call                   |
 
 ---
 
+## 🧱 Tech Stack
+
+| Layer       | Technology                  |
+|-------------|-----------------------------|
+| Frontend    | React.js + Material UI       |
+| Backend     | Node.js + Express.js         |
+| Database    | MongoDB + Mongoose           |
+| Real-time   | WebRTC (Media), Socket.IO (Signaling & Chat) |
+
+---
+
+## ⚙️ Getting Started
+
+To run this app locally, follow these steps:
+
+### 🔧 Prerequisites
+- Node.js
+- MongoDB
+
+### 📦 Setup
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Sahilshrma31/PeerSpace.git
+   cd PeerSpace
+Backend Setup
+cd backend
+npm install
+Frontend Setup
+cd ../frontend
+npm install
+Environment Variables
+Create a .env file in the backend/ directory:
+
+MONGO_URI=mongodb://127.0.0.1:27017/peerspace
+PORT=5000
+Run the App
+Start backend server:
+
+cd backend
+npm start
+Start frontend React app:
+
+cd ../frontend
+npm start
+Open in Browser
+Visit http://localhost:3000
+🔍 How It Works
+
+Component	Role
+Signaling	Handled by Socket.IO for exchanging SDP, ICE between peers
+Video/Audio	WebRTC establishes direct media connection using getUserMedia()
+Screen Sharing	Uses getDisplayMedia() and renegotiates video track
+Chat System	Real-time messages broadcasted via Socket.IO
+User History	Stored in MongoDB, fetched for logged-in users
+🧑‍💻 Author
+
+Sahil Sharma
+GitHub · LinkedIn
+📌 Note
+
+This application is optimized for local development and private deployments.
+For production usage:
+Use HTTPS
+Set up STUN/TURN servers for broader WebRTC support
 
