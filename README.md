@@ -96,7 +96,7 @@ http://localhost:3000
 - If signed in, session data is saved in MongoDB for history.
 
 ## Author
-👨‍💻 Developed by [Sahil Sharma](https://github.com/Sahilshrma31)
-
-- 📍 NIT Hamirpur
+👨‍💻 Developed by [Sahil Sharma]
+(https://github.com/Sahilshrma31)
+🎓 B.Tech in Electronics and Communication Engineering, NIT Hamirpur
 - 🔗 [LinkedIn](https://linkedin.com/in/sahilshrma31)
