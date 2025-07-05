@@ -1,13 +1,15 @@
 <h1 align="center">👥 PeerSpace</h1>
 
 <p align="center">
-  A Real-Time WebRTC Video Conferencing Platform built with the MERN Stack + WebRTC + Socket.IO.
+  <b>A Real-Time WebRTC Video Conferencing App</b><br/>
+  Built with MERN Stack, WebRTC, Socket.IO & Material UI
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/WebRTC-Peer--to--Peer-green" />
   <img src="https://img.shields.io/badge/Socket.IO-Realtime-black" />
-  <img src="https://img.shields.io/badge/React-Frontend-blue" />
+  <img src="https://img.shields.io/badge/MaterialUI-Design-blue" />
+  <img src="https://img.shields.io/badge/React-Frontend-lightblue" />
   <img src="https://img.shields.io/badge/Node.js-Backend-green" />
   <img src="https://img.shields.io/badge/MongoDB-Database-success" />
 </p>
@@ -16,85 +18,83 @@
 
 ## 🌐 About the Project
 
-**PeerSpace** is a robust, real-time video conferencing web app that allows users to connect face-to-face using **WebRTC**. It's designed for seamless communication, offering:
-- 🔴 HD video/audio calling
-- 📤 Screen sharing
-- 💬 Realtime chat
-- 🕑 Meeting history
-- 🚪 Guest join without login
+**PeerSpace** is a powerful real-time video conferencing platform that enables:
+- 🎥 HD Video/Audio Calls
+- 📤 Screen Sharing
+- 💬 Realtime Chat
+- 🕑 Session History
+- 🚪 Guest Access without Login
 
-Built using the **MERN stack**, this app uses **WebRTC for peer-to-peer media**, and **Socket.IO for signaling and chat**. Ideal for remote teams, online classrooms, or personal communication on a local network.
+Built using **MERN**, with **WebRTC** handling peer-to-peer video/audio and **Socket.IO** powering signaling and chat, this app is perfect for:
+- Remote meetings
+- Online classrooms
+- Personal conferencing
+- Local-network collaboration
 
 ---
 
-## ✨ Features Breakdown
+## 🚀 Live Preview
 
-| Feature              | Description                                                                                       | Implementation Details                                                                                   |
-|----------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| 🎥 Video Calling     | Peer-to-peer high-quality video and audio calling                                                 | Implemented using WebRTC APIs (`getUserMedia`, `RTCPeerConnection`, ICE candidates, SDP offers/answers)  |
-| 💬 Chat              | Text chat during calls                                                                            | Uses Socket.IO to emit and receive messages in real-time                                                 |
-| 🖥 Screen Sharing     | Share screen while on video call                                                                  | Uses `getDisplayMedia()` in WebRTC and replaces the video track in existing connection                    |
-| 🕒 Meeting History   | Record of past calls stored in database                                                           | MongoDB stores metadata like time, participants, room ID                                                 |
-| 🚪 Guest Join        | Join rooms without creating an account                                                            | Frontend generates guest IDs and sends them to backend to create a temp session                          |
-| 🧑‍🎨 UI/UX            | Minimal, responsive, easy-to-use                                                                 | Built with Tailwind CSS & custom React components                                                        |
+> 🔗 **Watch a Demo:** [YouTube Link](#)
+
+⚠️ *WebRTC requires `localhost` or HTTPS for video/audio to function properly.*
 
 ---
 
 ## 🧱 Tech Stack
 
-| Layer        | Technology             | Description                                           |
-|--------------|------------------------|-------------------------------------------------------|
-| 💻 Frontend  | React.js               | SPA with hooks, component-based architecture          |
-| 🎨 Styling   | Tailwind CSS           | Utility-first responsive design                       |
-| 🌐 Backend   | Node.js, Express.js    | REST API, signaling server for WebRTC                 |
-| 🧠 Realtime  | Socket.IO              | For chat and WebRTC signaling                         |
-| 📡 Media     | WebRTC                 | Handles video/audio/screen-sharing P2P connections    |
-| 🗄 Database   | MongoDB + Mongoose     | Stores meeting history and optional user data         |
+| Layer         | Tech                  | Description                                   |
+|---------------|-----------------------|-----------------------------------------------|
+| 💻 Frontend   | React.js              | Component-based SPA                           |
+| 🎨 UI Design  | Material UI           | Modern design system for styling              |
+| 🌐 Backend    | Node.js, Express.js   | REST API & WebRTC signaling                   |
+| 🧠 Realtime   | Socket.IO             | Bi-directional events for chat & signaling    |
+| 📡 WebRTC     | Browser API           | Handles P2P video/audio/screen-sharing        |
+| 🗄 Database    | MongoDB + Mongoose    | Stores sessions, messages, and room data      |
 
 ---
 
-## 🛠 Setup Instructions
+## ✨ Features Overview
 
-### 1️⃣ Clone the Repository
-
-```bash
-## ⚙️ Setup Instructions
-
-> Follow the steps below to run the project locally on your system.
-
-| 🔧 Step | 💻 Command |
-|--------|------------|
-| 1️⃣ Clone the Repository | ```bash<br>git clone https://github.com/Sahilshrma31/PeerSpace.git<br>cd PeerSpace``` |
-| 2️⃣ Install Backend Dependencies | ```bash<br>cd backend<br>npm install``` |
-| 3️⃣ Install Frontend Dependencies | ```bash<br>cd ../frontend<br>npm install``` |
-| 4️⃣ Add Environment Variables | Create a `.env` file inside the `backend/` folder with the following content:<br><br>```env<br>MONGO_URI=mongodb://127.0.0.1:27017/peerspace<br>PORT=5000``` |
-| ▶️ Start Backend Server | ```bash<br>cd backend<br>npm start``` |
-| ▶️ Start Frontend React App | ```bash<br>cd ../frontend<br>npm start``` |
-| 🌐 Access Application | Visit: [`http://localhost:3000`](http://localhost:3000) |
+| Feature              | Description                                                                                       | Implementation Details                                                                                   |
+|----------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| 🎥 Video Calling     | Peer-to-peer HD video & audio                                                                     | WebRTC APIs: `getUserMedia()`, `RTCPeerConnection`, ICE candidates, SDP                                  |
+| 💬 Chat              | Realtime messaging in each room                                                                   | Powered by Socket.IO with timestamped messages                                                           |
+| 🖥 Screen Sharing     | Share screen during video calls                                                                   | Uses `getDisplayMedia()` + renegotiation of media tracks                                                 |
+| 🕒 Session History   | Track past sessions and metadata                                                                  | MongoDB stores room info, time, users                                                                    |
+| 🚪 Guest Access      | No login needed to join a meeting                                                                 | Frontend generates temp guest profiles and sends to backend                                              |
+| 🧑‍🎨 UI/UX            | Modern and responsive interface                                                                    | Built using Material UI components and custom styles                                                     |
 
 ---
 
-## 📺 Live Demo (YouTube)
+## ⚙️ Getting Started
 
-🔗 **Watch the Project in Action:** [Live Demo on YouTube](#)
+Follow these simple steps to run the app locally:
 
-> ⚠️ *Note: This is a local deployment demo since WebRTC peer-to-peer communication requires HTTPS or localhost.*
+| 🔧 Step | Command |
+|--------|---------|
+| **1️⃣ Clone the Repo** | ```bash<br>git clone https://github.com/Sahilshrma31/PeerSpace.git<br>cd PeerSpace``` |
+| **2️⃣ Backend Setup** | ```bash<br>cd backend<br>npm install``` |
+| **3️⃣ Frontend Setup** | ```bash<br>cd ../frontend<br>npm install``` |
+| **4️⃣ Environment Variables** | Create a `.env` file inside `/backend`:<br><br>```env<br>MONGO_URI=mongodb://127.0.0.1:27017/peerspace<br>PORT=5000``` |
+| **▶️ Start Backend Server** | ```bash<br>cd backend<br>npm start``` |
+| **▶️ Start Frontend React App** | ```bash<br>cd ../frontend<br>npm start``` |
+| **🌐 View on Browser** | Visit [`http://localhost:3000`](http://localhost:3000) |
 
 ---
 
 ## 🧠 How It Works – Under the Hood
 
-| 🧩 Feature | ⚙️ Description |
-|-----------|----------------|
-| **Signaling** | Users join a room via **Socket.IO**. SDP offers and ICE candidates are exchanged in real time. |
-| **WebRTC** | Once signaling completes, a direct **P2P connection** is formed using `RTCPeerConnection`. |
-| **Media Streams** | User's camera and mic are accessed using `getUserMedia()` and attached to video/audio tracks. |
-| **Screen Share** | `getDisplayMedia()` replaces the current video stream and renegotiates the peer connection. |
-| **Chat Messaging** | Messages are emitted and broadcast via sockets, along with timestamps and user IDs. |
-| **MongoDB** | Stores metadata like **room ID, session times, usernames, and chat logs** (if any). |
+| Layer           | Description                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| **Signaling**   | Users join rooms via Socket.IO. SDP & ICE candidates exchanged in real-time |
+| **P2P Media**   | WebRTC creates direct connection after signaling                            |
+| **Stream Setup**| `getUserMedia()` captures video/audio and attaches to peer connection       |
+| **Screen Share**| `getDisplayMedia()` replaces video track + triggers renegotiation           |
+| **Chat System** | Socket.IO emits messages to all peers with timestamps and user info         |
+| **Database**    | MongoDB stores meeting metadata: room ID, start/end time, optional messages |
 
 ---
 
-✅ *This section now looks modern, readable, and recruiter-friendly. Just paste it into your README.md!*
+## 📂 Folder Structure
 
-Would you like a polished **full README** including features, tech stack, and folder structure? Let me know!
