@@ -1,84 +1,100 @@
-# 🎥 PeerSpace – Real-Time WebRTC Video Conferencing Platform
+<h1 align="center">👥 PeerSpace</h1>
 
-PeerSpace is a feature-rich, real-time video conferencing application built for seamless peer-to-peer communication. It offers high-quality video/audio calls, integrated chat, screen sharing, and meeting history — all designed with modern, responsive UI for effortless collaboration on local networks.
+<p align="center">
+  A Real-Time WebRTC Video Conferencing Platform built with the MERN Stack + WebRTC + Socket.IO.
+</p>
 
----
-
-## ✨ Features
-
-- 🎥 **Peer-to-Peer Video Calls** – High-quality, low-latency video and audio using WebRTC.
-- 💬 **Integrated Chat** – Real-time text chat alongside your video calls.
-- 🖥️ **Screen Sharing** – Share your screen to present code, slides, or anything else.
-- 📜 **Meeting History** – Track past meetings and sessions with MongoDB.
-- 🚪 **Guest Join Option** – Join meetings without signing up.
-- 🧑‍💻 **Intuitive UI** – Clean, minimal, and user-friendly interface.
-
----
-
-## 🚀 Tech Stack
-
-- **Frontend**: React.js + Tailwind CSS
-- **Backend**: Node.js + Express.js
-- **Database**: MongoDB (Mongoose)
-- **Real-Time Communication**:
-  - **WebRTC** – For video, audio, and screen sharing.
-  - **Socket.IO** – For signaling and real-time messaging.
+<p align="center">
+  <img src="https://img.shields.io/badge/WebRTC-Peer--to--Peer-green" />
+  <img src="https://img.shields.io/badge/Socket.IO-Realtime-black" />
+  <img src="https://img.shields.io/badge/React-Frontend-blue" />
+  <img src="https://img.shields.io/badge/Node.js-Backend-green" />
+  <img src="https://img.shields.io/badge/MongoDB-Database-success" />
+</p>
 
 ---
 
-## 🛠️ Installation & Setup
+## 🌐 About the Project
 
-Clone the repository:
+**PeerSpace** is a robust, real-time video conferencing web app that allows users to connect face-to-face using **WebRTC**. It's designed for seamless communication, offering:
+- 🔴 HD video/audio calling
+- 📤 Screen sharing
+- 💬 Realtime chat
+- 🕑 Meeting history
+- 🚪 Guest join without login
+
+Built using the **MERN stack**, this app uses **WebRTC for peer-to-peer media**, and **Socket.IO for signaling and chat**. Ideal for remote teams, online classrooms, or personal communication on a local network.
+
+---
+
+## ✨ Features Breakdown
+
+| Feature              | Description                                                                                       | Implementation Details                                                                                   |
+|----------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| 🎥 Video Calling     | Peer-to-peer high-quality video and audio calling                                                 | Implemented using WebRTC APIs (`getUserMedia`, `RTCPeerConnection`, ICE candidates, SDP offers/answers)  |
+| 💬 Chat              | Text chat during calls                                                                            | Uses Socket.IO to emit and receive messages in real-time                                                 |
+| 🖥 Screen Sharing     | Share screen while on video call                                                                  | Uses `getDisplayMedia()` in WebRTC and replaces the video track in existing connection                    |
+| 🕒 Meeting History   | Record of past calls stored in database                                                           | MongoDB stores metadata like time, participants, room ID                                                 |
+| 🚪 Guest Join        | Join rooms without creating an account                                                            | Frontend generates guest IDs and sends them to backend to create a temp session                          |
+| 🧑‍🎨 UI/UX            | Minimal, responsive, easy-to-use                                                                 | Built with Tailwind CSS & custom React components                                                        |
+
+---
+
+## 🧱 Tech Stack
+
+| Layer        | Technology             | Description                                           |
+|--------------|------------------------|-------------------------------------------------------|
+| 💻 Frontend  | React.js               | SPA with hooks, component-based architecture          |
+| 🎨 Styling   | Tailwind CSS           | Utility-first responsive design                       |
+| 🌐 Backend   | Node.js, Express.js    | REST API, signaling server for WebRTC                 |
+| 🧠 Realtime  | Socket.IO              | For chat and WebRTC signaling                         |
+| 📡 Media     | WebRTC                 | Handles video/audio/screen-sharing P2P connections    |
+| 🗄 Database   | MongoDB + Mongoose     | Stores meeting history and optional user data         |
+
+---
+
+## 🛠 Setup Instructions
+
+### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/Sahilshrma31/PeerSpace.git
-cd PeerSpace
-Install backend dependencies:
+## ⚙️ Setup Instructions
 
-cd backend
-npm install
-Install frontend dependencies:
+> Follow the steps below to run the project locally on your system.
 
-cd ../frontend
-npm install
-🔐 Configure Environment Variables
-Create a .env file in the /backend directory:
+| 🔧 Step | 💻 Command |
+|--------|------------|
+| 1️⃣ Clone the Repository | ```bash<br>git clone https://github.com/Sahilshrma31/PeerSpace.git<br>cd PeerSpace``` |
+| 2️⃣ Install Backend Dependencies | ```bash<br>cd backend<br>npm install``` |
+| 3️⃣ Install Frontend Dependencies | ```bash<br>cd ../frontend<br>npm install``` |
+| 4️⃣ Add Environment Variables | Create a `.env` file inside the `backend/` folder with the following content:<br><br>```env<br>MONGO_URI=mongodb://127.0.0.1:27017/peerspace<br>PORT=5000``` |
+| ▶️ Start Backend Server | ```bash<br>cd backend<br>npm start``` |
+| ▶️ Start Frontend React App | ```bash<br>cd ../frontend<br>npm start``` |
+| 🌐 Access Application | Visit: [`http://localhost:3000`](http://localhost:3000) |
 
-MONGO_URI=your_mongodb_connection_string
-PORT=5000
-Ensure MongoDB is running locally or use a cloud URI (MongoDB Atlas).
+---
 
-▶️ Running the App Locally
+## 📺 Live Demo (YouTube)
 
-Start the backend server:
+🔗 **Watch the Project in Action:** [Live Demo on YouTube](#)
 
-cd backend
-npm start
-Start the frontend:
+> ⚠️ *Note: This is a local deployment demo since WebRTC peer-to-peer communication requires HTTPS or localhost.*
 
-cd ../frontend
-npm start
-Open in browser: http://localhost:3000
+---
 
-📺 Live Demo
+## 🧠 How It Works – Under the Hood
 
-Watch the full walkthrough on YouTube:
+| 🧩 Feature | ⚙️ Description |
+|-----------|----------------|
+| **Signaling** | Users join a room via **Socket.IO**. SDP offers and ICE candidates are exchanged in real time. |
+| **WebRTC** | Once signaling completes, a direct **P2P connection** is formed using `RTCPeerConnection`. |
+| **Media Streams** | User's camera and mic are accessed using `getUserMedia()` and attached to video/audio tracks. |
+| **Screen Share** | `getDisplayMedia()` replaces the current video stream and renegotiates the peer connection. |
+| **Chat Messaging** | Messages are emitted and broadcast via sockets, along with timestamps and user IDs. |
+| **MongoDB** | Stores metadata like **room ID, session times, usernames, and chat logs** (if any). |
 
-👉 Watch Demo
+---
 
-🤝 Contributing
+✅ *This section now looks modern, readable, and recruiter-friendly. Just paste it into your README.md!*
 
-Contributions are welcome!
-
-Fork the project
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a pull request
-💖 Made with Passion
-
-This project is developed with dedication by Sahil Sharma.
-
-📧 sahil.sharma3184@gmail.com
-🔗 LinkedIn
-🌐 Project Repository
+Would you like a polished **full README** including features, tech stack, and folder structure? Let me know!
