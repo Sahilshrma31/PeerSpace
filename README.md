@@ -18,18 +18,29 @@
 
 ## 🌐 About the Project
 
-**PeerSpace** is a powerful real-time video conferencing platform that enables:
-- 🎥 HD Video/Audio Calls
-- 📤 Screen Sharing
-- 💬 Realtime Chat
-- 🕑 Session History
-- 🚪 Guest Access without Login
+**PeerSpace** is a full-stack, real-time video conferencing web application designed for **1-on-1 peer-to-peer communication** with high performance, privacy, and simplicity in mind.
 
-Built using **MERN**, with **WebRTC** handling peer-to-peer video/audio and **Socket.IO** powering signaling and chat, this app is perfect for:
-- Remote meetings
-- Online classrooms
-- Personal conferencing
-- Local-network collaboration
+Whether you're a student seeking a smooth tutoring session, a professional conducting remote interviews, or someone hosting a casual 1-on-1 video call, PeerSpace offers a seamless, secure, and modern experience.
+
+### 🔍 Key Highlights
+
+- ✅ **No Sign-Up Needed:** Users can create or join rooms instantly with a room ID or link.
+- 📡 **Peer-to-Peer Connection:** Uses WebRTC for direct, low-latency video/audio without routing through a server.
+- 🔐 **Secure & Private:** Media is exchanged peer-to-peer, reducing risks of interception or eavesdropping.
+- 🖥️ **Modern UI/UX:** Responsive Material UI components offer a clean and intuitive interface.
+- 🌐 **Cross-Browser Support:** Optimized for Chrome, Firefox, and other major browsers supporting WebRTC.
+- 📊 **Efficient Resource Use:** No central video server — the app relies on your browser’s capabilities to manage streams.
+
+### 🎨 UI/UX Design Highlights
+
+| Component              | UI Feature                                                                 |
+|------------------------|----------------------------------------------------------------------------|
+| 🎬 **Landing Page**     | Elegant hero section with animated background, logo, and "Create/Join Room" CTA |
+| 📹 **Call Interface**   | Split screen for local/remote video, floating action buttons (FAB) for mute, end call, screen share |
+| 💬 **Chat Drawer**      | Slide-in chat panel with time-stamped messages, emoji support, and auto-scroll |
+| 🔲 **Screen Share Modal**| Clean overlay UI showing current status and stop sharing option              |
+| 🧾 **Session Summary**  | Post-call modal showing call duration, participants, and optional feedback form |
+| 📱 **Responsive Design**| Fully mobile-compatible experience using Material UI's breakpoints and grid system |
 
 ---
 
@@ -96,9 +107,6 @@ Follow these simple steps to run the app locally:
 
 ---
 
-
----
-
 ## 🧑‍💻 Author
 
 - **Sahil Sharma**  
@@ -108,12 +116,11 @@ Follow these simple steps to run the app locally:
 
 ## 📌 Note
 
-> This app is currently meant for **local usage or custom deployment**.
+> This app is currently meant for **local usage or custom deployment**.  
 > Production-ready WebRTC deployments require:
 > - HTTPS (via custom domain)
 > - STUN/TURN servers for NAT traversal
 
 ---
-
 
 
