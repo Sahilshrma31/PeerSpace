@@ -1,107 +1,117 @@
-Real-time WebRTC Video Conferencing - PeerSpace
-A Feature-Rich Peer-to-Peer Communication Platform
-This project, named PeerSpace, is a robust, real-time video conferencing application designed to facilitate seamless peer-to-peer communication, including video calls, integrated chat, screen sharing, and meeting history. Built with modern web technologies, it offers a secure and efficient way for individuals to connect and collaborate online on a local network.
+# 🚀 PeerSpace - Real-Time WebRTC Video Conferencing Platform
 
-✨ Features
-Peer-to-Peer Video Calls: High-quality, real-time video and audio communication powered by WebRTC.
 
-Integrated Chat: Text-based chat functionality alongside video calls for concurrent discussions.
+**PeerSpace** is a feature-rich, real-time video conferencing application designed to enable seamless peer-to-peer communication. With support for high-quality video/audio calls, integrated chat, screen sharing, and meeting history, PeerSpace offers a secure and efficient way to connect and collaborate—built entirely on the MERN stack and powered by WebRTC.
 
-Screen Sharing: Share your screen effortlessly to present documents, code, or anything else during a call.
+---
 
-Meeting History: Easily access a record of your past meetings for reference.
+## ✨ Features
 
-Guest Join Option: Join meetings quickly as a guest without needing to create an account.
+- ✅ **Peer-to-Peer Video Calls**  
+  High-quality, real-time audio/video communication using WebRTC.
 
-Intuitive User Interface: A clean and user-friendly design for a smooth communication experience.
+- 💬 **Integrated Chat**  
+  Chat alongside your video calls with smooth real-time messaging.
 
-🚀 Technologies Used
-This project leverages a powerful combination of technologies to deliver its features:
+- 🖥️ **Screen Sharing**  
+  Share your screen during a call for presentations or collaboration.
 
-WebRTC: For real-time communication capabilities (video, audio, screen sharing).
+- 🕓 **Meeting History**  
+  Keep track of your past meetings and revisit important moments.
 
-Socket.IO: Enables real-time, bidirectional communication between web clients and the server for signaling and chat.
+- 👤 **Guest Join Option**  
+  Instantly join meetings as a guest—no sign-up required.
 
-MERN Stack:
+- 🎨 **Intuitive UI**  
+  Clean, modern interface built with user experience in mind.
 
-MongoDB: A NoSQL database for flexible data storage (e.g., meeting history, user data).
+---
 
-Express.js: A back-end web application framework for building RESTful APIs.
+## 🔧 Tech Stack
 
-React.js: A JavaScript library for building interactive user interfaces.
+| Technology  | Role |
+|-------------|------|
+| **WebRTC** | Real-time video, audio, and screen sharing |
+| **Socket.IO** | Signaling and real-time chat |
+| **MongoDB** | Database for meeting history and users |
+| **Express.js** | RESTful API backend |
+| **React.js** | Frontend UI |
+| **Node.js** | Backend runtime |
 
-Node.js: A JavaScript runtime for building scalable server-side applications.
+---
 
-📦 Installation
-To get a local copy up and running, follow these simple steps:
+## 📦 Installation
 
-Clone the repository:
+To run PeerSpace locally, follow these steps:
 
-Bash
+### 1️⃣ Clone the repository
 
+```bash
 git clone https://github.com/Sahilshrma31/PeerSpace.git
 cd PeerSpace
-Install server dependencies:
-
-Bash
-
-cd backend # Assuming your backend code is in a 'backend' folder
-npm install
-Install client dependencies:
-
-Bash
-
-cd ../frontend # Assuming your frontend code is in a 'frontend' folder
-npm install
-Set up environment variables:
-Create a .env file in your backend directory and add necessary variables (e.g., MongoDB URI, Socket.IO port).
-
-MONGO_URI=your_mongodb_connection_string # e.g., mongodb://127.0.0.1:27017/peerdodb
-PORT=5000
-Note: Adjust variable names and values based on your actual backend configuration. For local MongoDB, ensure your MongoDB server is running.
-
-🏃 How to Run
-Since this project is primarily set up for local development due to the intricacies of WebRTC deployment, follow these steps to run it on your machine:
-
-Start the backend server:
-
-Bash
-
+2️⃣ Install backend dependencies
 cd backend
-npm start # Or 'node server.js' depending on your script
-The server should start on the port specified in your .env file (e.g., http://localhost:5000).
+npm install
+3️⃣ Install frontend dependencies
+cd ../frontend
+npm install
+4️⃣ Set up environment variables
+Create a .env file in the backend directory with the following content:
 
-Start the frontend development server:
+MONGO_URI=mongodb://127.0.0.1:27017/peerdodb
+PORT=5000
+⚠️ Ensure MongoDB is running locally if you're using the above URI.
+🏃 Running the Application Locally
 
-Bash
+Start the backend server
+cd backend
+npm start  # or node server.js
+Server should run at http://localhost:5000
 
+Start the frontend server
 cd ../frontend
 npm start
-This will usually open the application in your browser at http://localhost:3000.
+Frontend will open in your browser at http://localhost:3000
 
-Now you should be able to access the application via http://localhost:3000 and start making video calls locally!
+📂 Folder Structure
 
+PeerSpace/
+├── backend/          # Express + MongoDB backend
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   └── server.js
+├── frontend/         # React frontend
+│   ├── components/
+│   ├── pages/
+│   └── App.js
+└── README.md
 🤝 Contributing
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks!
+Contributions are welcome! 💙
+Here’s how you can help:
 
-Fork the Project
-
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-
-Push to the Branch (git push origin feature/AmazingFeature)
-
+Fork the project
+Create your feature branch
+git checkout -b feature/AmazingFeature
+Commit your changes
+git commit -m 'Add some AmazingFeature'
+Push to the branch
+git push origin feature/AmazingFeature
 Open a Pull Request
- 
-💖 Made with Love and Efforts
-This project was meticulously crafted and brought to life by Sahil Sharma. Every line of code, every feature, and every detail has been infused with dedication and passion. I hope you enjoy using it as much as I enjoyed building it.
+Or you can simply open an issue with the tag enhancement.
 
-📧 Contact
-Sahil Sharma – sahil.sharma3184@gmail.com
+⭐ Don’t forget to star the repo if you like it!
+📸 Screenshots
 
-LinkedIn: https://linkedin.com/in/sahil-sharma-95512628a
+Add some screenshots or a demo GIF here for better visual appeal!
+(Optional but highly recommended for showing UI and functionality)
+💖 Made with Love
 
-Project Link: https://github.com/Sahilshrma31/PeerSpace
+This project was crafted with dedication and passion by Sahil Sharma. Every feature and detail reflects countless hours of effort to make real-time communication seamless and accessible.
+
+📬 Contact
+
+📧 Email: sahil.sharma3184@gmail.com
+💼 LinkedIn: linkedin.com/in/sahil-sharma-95512628a
+🌐 Project Link: https://github.com/Sahilshrma31/PeerSpace
