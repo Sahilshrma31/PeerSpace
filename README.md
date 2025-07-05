@@ -1,70 +1,4 @@
-<h1 align="center">👥 PeerSpace</h1>
 
-<p align="center">
-  <b>A Real-Time 1-on-1 Video Calling App</b><br/>
-  Built with MERN Stack, WebRTC, and Socket.IO
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/WebRTC-Video--Call-blue" />
-  <img src="https://img.shields.io/badge/Socket.IO-Realtime-black" />
-  <img src="https://img.shields.io/badge/MERN-Fullstack-green" />
-  <img src="https://img.shields.io/badge/MaterialUI-Styling-blueviolet" />
-</p>
-
----
-
-## 🌐 About the Project
-
-**PeerSpace** is a real-time video conferencing application where users can:
-
-- 🔹 Make 1-on-1 **video calls**
-- 🔹 **Join as guest** or with an account
-- 🔹 **Sign up & log in** to track session history
-- 🔹 **Chat simultaneously** during the call
-- 🔹 View **history of past sessions**
-- 🔹 **Share their screen** during a call
-
-Everything is built using **MERN**, **WebRTC**, and **Socket.IO**, with a modern UI using **Material UI**.
-
----
-
-## ✨ Core Features
-
-| Feature             | Description                                                   |
-|---------------------|---------------------------------------------------------------|
-| 🎥 Video Call        | 1-on-1 peer-to-peer video/audio using WebRTC                 |
-| 🚪 Join as Guest     | No account required to join a room                           |
-| 🔐 Sign In / Sign Up | Users can register and login to view their session history   |
-| 💬 Chat             | Real-time chat while on call                                  |
-| 🧾 Call History      | Authenticated users can view past sessions they've attended  |
-| 🖥 Screen Share      | Share your screen during the call seamlessly                  |
-
----
-
-## 🧱 Tech Stack
-
-| Layer       | Technology                  |
-|-------------|-----------------------------|
-| Frontend    | React.js, Material UI       |
-| Backend     | Node.js, Express.js         |
-| Database    | MongoDB + Mongoose          |
-| Realtime    | WebRTC + Socket.IO          |
-
----
-
-## ⚙️ Getting Started
-
-Follow these steps
-You said:
-<p align="center">
-  <img src="https://img.shields.io/badge/WebRTC-Video--Call-blue" />
-  <img src="https://img.shields.io/badge/Socket.IO-Realtime-black" />
-  <img src="https://img.shields.io/badge/MERN-Fullstack-green" />
-  <img src="https://img.shields.io/badge/MaterialUI-Styling-blueviolet" />
-</p> dont add this 
-ChatGPT said:
-Perfect! Here's your clean and final README.md code without the badge section, strictly based on your specified functionalities:
 
 <h1 align="center">👥 PeerSpace</h1>
 
@@ -169,4 +103,3 @@ This application is optimized for local development and private deployments.
 For production usage:
 Use HTTPS
 Set up STUN/TURN servers for broader WebRTC support
-
