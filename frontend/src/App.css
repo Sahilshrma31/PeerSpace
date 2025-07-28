@@ -1,58 +1,98 @@
 @media (max-width: 768px) {
   .landingMainContainer {
     flex-direction: column-reverse;  /* Stack image below text */
-    padding-inline: 1rem;
+    padding: 1.5rem 1rem;  /* Added top/bottom padding */
     height: auto;
-    gap: 2rem;
+    gap: 2.5rem;  /* Slightly more space between elements */
     text-align: center;
+    margin-bottom: 2rem;  /* Breathing space at bottom */
   }
-
+  
   .landingMainContainer > div:nth-child(1) {
     font-size: 1.6rem;
+    padding: 0 0.5rem;  /* Side padding for text */
   }
-
+  
   .landingMainContainer > div:nth-child(1) div[role='button'] {
-    margin-inline: auto;
-    padding: 0.8rem;
+    margin: 1rem auto;  /* More top/bottom margin */
+    padding: 1rem 1.5rem;  /* More comfortable button padding */
+    min-height: 48px;  /* Touch-friendly minimum */
   }
-
+  
   .landingMainContainer > div:nth-child(2) img {
-    width: 90vw;
+    width: 88vw;  /* Slightly smaller to add side margins */
     height: auto;
-    max-height: 40vh;
-    border-radius: 10px;
+    max-height: 35vh;  /* Bit smaller for better proportions */
+    border-radius: 12px;  /* Slightly more rounded */
+    margin: 0 auto;
   }
-
+  
   .navBar, .landingPageContainer nav {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;  /* More space between nav items */
     text-align: center;
+    padding: 1rem 0.5rem;  /* Padding for breathing room */
   }
-
+  
   .landingPageContainer nav h2 {
     font-size: 1.5rem;
+    margin-bottom: 0.5rem;  /* Space below heading */
   }
-
+  
   .landingPageContainer nav .navlist {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.25rem;  /* Slightly more gap */
+    padding: 0 0.5rem;  /* Side padding */
   }
-
+  
   .meetContainer {
     flex-direction: column;
     height: auto;
-    gap: 2rem;
-    padding-inline: 10px;
+    gap: 2.5rem;  /* More space between sections */
+    padding: 1.5rem 15px 2rem;  /* More padding all around */
+    margin-top: 1rem;
   }
-
+  
   .rightPanel > img {
-    width: 90vw;
+    width: 88vw;  /* Consistent with other images */
     height: auto;
+    border-radius: 10px;
+    margin: 0 auto;
   }
-
+  
   .leftPanel {
     justify-content: center;
     text-align: center;
+    padding: 1rem 0.5rem;  /* Internal padding */
+  }
+  
+  /* Additional touch-friendly improvements */
+  button, [role='button'] {
+    min-height: 44px;  /* iOS recommendation */
+    padding: 0.75rem 1.25rem;
+  }
+  
+  /* Better spacing for text elements */
+  p, div {
+    line-height: 1.6;  /* Better readability */
+  }
+  
+  /* Ensure proper margins on smaller devices */
+  @media (max-width: 480px) {
+    .landingMainContainer {
+      padding: 1rem 0.75rem;
+      gap: 2rem;
+    }
+    
+    .landingMainContainer > div:nth-child(2) img,
+    .rightPanel > img {
+      width: 92vw;  /* Bit more width on very small screens */
+    }
+    
+    .meetContainer {
+      padding-inline: 12px;
+      gap: 2rem;
+    }
   }
 }
