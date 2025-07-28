@@ -58,11 +58,21 @@ export default function Authentication() {
                 setPassword("")
             }
         } catch (err) {
-
-            console.log(err);
-            let message = (err.response.data.message);
-            setError(message);
+            console.log("FULL ERROR OBJECT:", err);
+            if (err.response) {
+                console.log("Server responded with:", err.response);
+                let message = err.response.data?.message || "Something went wrong with the server.";
+                setError(message);
+            } else if (err.request) {
+                console.log("Request was made but no response:", err.request);
+                setError("No response from server. Check your backend.");
+            } else {
+                console.log("Unknown error:", err.message);
+                setError("Unexpected error: " + err.message);
+            }
         }
+        
+        
     }
 
 
