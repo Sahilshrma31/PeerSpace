@@ -1,142 +1,170 @@
-.meetVideoContainer {     
-    display: flex;     
-    flex-direction: column;     
-    height: 100vh;     
-    background: #0f1117;     
-    font-family: 'Segoe UI', Tahoma, sans-serif;     
-    color: white;     
-    overflow: hidden;   
-}      
 
-/* Layout Container - Changed to column layout for desktop too */   
-.mainLayout {     
-    display: flex;     
-    flex-direction: column;     
-    flex: 1;     
-    padding: 10px;     
-    gap: 10px;     
-    overflow: hidden;   
-}      
-
-/* Responsive video container */   
-.conferenceView {     
-    flex: 1;     
-    display: flex;     
-    justify-content: center;     
-    align-items: center;     
-    position: relative;   
-}      
-
-.conferenceView video {     
-    width: 100%;     
-    max-width: 700px;     
-    height: auto;     
-    border-radius: 12px;     
-    object-fit: contain;     /* Shows full video without cropping */
-    border: 1px solid rgba(255, 255, 255, 0.1);     
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);   
-}  
-
-/* Chat Room - Now takes full width */   
-.chatRoom {     
-    width: 100%;     
-    background: white;     
-    border-radius: 10px;     
-    padding: 20px;     
-    color: black;     
-    display: flex;     
-    flex-direction: column;     
-    height: 100vh;     
-    overflow-y: auto;   
-}      
-
-.chatContainer {     
-    flex: 1;     
-    display: flex;     
-    flex-direction: column;     
-    justify-content: space-between;   
-}      
-
-.chattingArea {     
-    margin-top: auto;   
-}      
-
-/* User small preview video */   
-.meetUserVideo {     
-    position: absolute;     
-    bottom: 20px;     
-    left: 20px;     
-    height: 100px;     
-    width: auto;     
-    border-radius: 8px;     
-    border: 1px solid rgba(255, 255, 255, 0.15);     
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);     
-    z-index: 5;   
-}      
-
-/* Controls Bar */   
-.buttonContainers {     
-    width: 100%;     
-    text-align: center;     
-    padding: 10px 0;     
-    background-color: rgba(25, 25, 25, 0.9);     
-    border-top: 1px solid rgba(255, 255, 255, 0.08);   
-}      
-
-.buttonContainers svg {     
-    font-size: 4rem;     
-    color: #f1f1f1;     
-    margin: 0 10px;     
-    cursor: pointer;     
-    padding: 8px;     
-    border-radius: 50%;     
-    background: transparent;     
-    transition: background 0.2s ease, transform 0.2s ease;   
-}      
-
-.buttonContainers svg:hover {     
-    background: rgba(255, 255, 255, 0.1);     
-    transform: scale(1.1);     
-    color: #00d8ff;   
-}         
-
-/* Media Queries */      
-@media (max-width: 768px) {     
-    .mainLayout {       
-        flex-direction: column;     
-    }        
-    
-    .chatRoom {       
-        width: 100%;       
-        max-height: 40vh;       
-        border-radius: 10px;       
-        padding: 10px;     
-    }        
-    
-    .conferenceView {       
-        width: 100%;     
-    }        
-    
-    .conferenceView video {       
-        width: 100%;       
-        height: auto;     
-    }        
-    
-    .meetUserVideo {       
-        height: 80px;       
-        bottom: 10px;       
-        left: 10px;     
-    }        
-    
-    .buttonContainers svg {       
-        font-size: 2rem;       
-        margin: 7px;     
-    }   
-}
-
-/* Look for something like this */
-.lobby-video-container {
-    height: 300px; /* Fixed height might be causing issues */
+  /* Meet Video Container */
+  .meetVideoContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #0f1117;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: white;
+    overflow: hidden;
+  }
+  
+  /* Layout Container - Changed to column layout for desktop too */
+  .mainLayout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    gap: 10px;
+    overflow: hidden;
+  }
+  
+  /* Responsive video container */
+  .conferenceView {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     width: 100%;
-    overflow: hidden; /* This could be hiding parts of the video */
-}
+  }
+  
+  .conferenceView video {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: contain; /* Shows full video without cropping */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  }
+  
+  /* Chat Room - Now takes full width */
+  .chatRoom {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .chatContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .chattingArea {
+    margin-top: auto;
+  }
+  
+  /* User small preview video */
+  .meetUserVideo {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 100px;
+    width: 120px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+  }
+  
+  /* Controls Bar */
+  .buttonContainers {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(25, 25, 25, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .buttonContainers svg {
+    font-size: 4rem;
+    color: #f1f1f1;
+    margin: 0 10px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  
+  .buttonContainers svg:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+    color: #00d8ff;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .mainLayout {
+      flex-direction: column;
+      padding-bottom: 100px; /* Leave space for preview video */
+    }
+  
+    .chatRoom {
+      width: 100%;
+      min-height: 30vh;
+      max-height: 40vh;
+      height: auto;
+      border-radius: 10px;
+      padding: 10px;
+    }
+  
+    .conferenceView {
+      width: 100%;
+      height: auto;
+    }
+  
+    .conferenceView video {
+      width: 100%;
+      height: auto;
+      max-width: none; /* Ensures video doesn't exceed screen width */
+    }
+  
+    .meetUserVideo {
+      width: 100px;
+      height: 80px;
+      bottom: 10px;
+      left: 10px;
+    }
+  
+    .buttonContainers svg {
+      font-size: 2rem;
+      margin: 7px;
+    }
+  
+    .chatContainer {
+      padding-bottom: 10px;
+    }
+  }
+  
+  /* Prevent lobby fixed sizing issues (if used) */
+  .lobby-video-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* Fix video container size on very small screens */
+  @media (max-width: 480px) {
+    .conferenceView video {
+      max-width: 100%; /* Ensure video fits the screen */
+      width: 100%;
+    }
+  
+    .meetUserVideo {
+      width: 80px;
+      height: 60px;
+      bottom: 5px;
+      left: 5px;
+    }
+  }
+  
