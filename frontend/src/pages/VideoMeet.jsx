@@ -146,69 +146,94 @@ export default function VideoMeetComponent() {
 
 
 
-    let getUserMediaSuccess = (stream) => {
-        try {
-            window.localStream.getTracks().forEach(track => track.stop())
-        } catch (e) { console.log(e) }
+   //  Function to handle successful webcam access
+let getUserMediaSuccess = (stream) => {
+    try {
+        // Stop existing tracks if any
+        window.localStream?.getTracks().forEach(track => track.stop());
+    } catch (e) {
+        console.log("Error stopping existing tracks:", e);
+    }
 
-        window.localStream = stream
-        localVideoref.current.srcObject = stream
+    // Set new stream to window and video element
+    window.localStream = stream;
+    if (localVideoref.current) {
+        localVideoref.current.srcObject = stream;
+        localVideoref.current.play(); // Ensures playback in some browsers
+    }
 
-        for (let id in connections) {
-            if (id === socketIdRef.current) continue
+    // Send stream to all peers except self
+    for (let id in connections) {
+        if (id === socketIdRef.current) continue;
 
-            connections[id].addStream(window.localStream)
+        connections[id].addStream(window.localStream);
 
-            connections[id].createOffer().then((description) => {
-                console.log(description)
-                connections[id].setLocalDescription(description)
-                    .then(() => {
-                        socketRef.current.emit('signal', id, JSON.stringify({ 'sdp': connections[id].localDescription }))
-                    })
-                    .catch(e => console.log(e))
-            })
-        }
+        connections[id].createOffer().then((description) => {
+            connections[id].setLocalDescription(description)
+                .then(() => {
+                    socketRef.current.emit('signal', id, JSON.stringify({
+                        sdp: connections[id].localDescription
+                    }));
+                })
+                .catch(e => console.log("Set local description error:", e));
+        });
+    }
 
-        stream.getTracks().forEach(track => track.onended = () => {
+    // Handle when a track ends (user closes webcam/mic)
+    stream.getTracks().forEach(track => {
+        track.onended = () => {
             setVideo(false);
             setAudio(false);
 
             try {
-                let tracks = localVideoref.current.srcObject.getTracks()
-                tracks.forEach(track => track.stop())
-            } catch (e) { console.log(e) }
+                let tracks = localVideoref.current?.srcObject?.getTracks();
+                tracks?.forEach(track => track.stop());
+            } catch (e) {
+                console.log("Track cleanup error:", e);
+            }
 
-            let blackSilence = (...args) => new MediaStream([black(...args), silence()])
-            window.localStream = blackSilence()
-            localVideoref.current.srcObject = window.localStream
+            // Replace with silent/black stream (optional fallback)
+            let blackSilence = (...args) => new MediaStream([black(...args), silence()]);
+            window.localStream = blackSilence();
+            if (localVideoref.current) {
+                localVideoref.current.srcObject = window.localStream;
+            }
 
             for (let id in connections) {
-                connections[id].addStream(window.localStream)
+                connections[id].addStream(window.localStream);
 
                 connections[id].createOffer().then((description) => {
                     connections[id].setLocalDescription(description)
                         .then(() => {
-                            socketRef.current.emit('signal', id, JSON.stringify({ 'sdp': connections[id].localDescription }))
+                            socketRef.current.emit('signal', id, JSON.stringify({
+                                sdp: connections[id].localDescription
+                            }));
                         })
-                        .catch(e => console.log(e))
-                })
+                        .catch(e => console.log("Set fallback SDP error:", e));
+                });
             }
-        })
-    }
+        };
+    });
 
-    let getUserMedia = () => {
-        if ((video && videoAvailable) || (audio && audioAvailable)) {
-            navigator.mediaDevices.getUserMedia({ video: video, audio: audio })
-                .then(getUserMediaSuccess)
-                .then((stream) => { })
-                .catch((e) => console.log(e))
-        } else {
-            try {
-                let tracks = localVideoref.current.srcObject.getTracks()
-                tracks.forEach(track => track.stop())
-            } catch (e) { }
+    return stream; // Ensure .then() chain receives the stream
+};
+
+
+   //  Function to trigger webcam/mic access
+let getUserMedia = () => {
+    if ((video && videoAvailable) || (audio && audioAvailable)) {
+        navigator.mediaDevices.getUserMedia({ video: video, audio: audio })
+            .then(getUserMediaSuccess)
+            .catch((e) => console.log("getUserMedia error:", e));
+    } else {
+        try {
+            let tracks = localVideoref.current?.srcObject?.getTracks();
+            tracks?.forEach(track => track.stop());
+        } catch (e) {
+            console.log("Media cleanup error:", e);
         }
     }
+};
 
 
 
@@ -529,7 +554,14 @@ export default function VideoMeetComponent() {
                     </div>
 
 
-                    <video className={styles.meetUserVideo} ref={localVideoref} autoPlay muted></video>
+                    <video
+  className={styles.meetUserVideo}
+  ref={localVideoref}
+  autoPlay
+  muted
+  playsInline //  Required for auto-play on mobile 
+></video>
+
 
                     <div className={styles.conferenceView}>
                         {videos.map((video) => (
