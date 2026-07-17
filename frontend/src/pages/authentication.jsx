@@ -1,129 +1,8 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import VideoCallIcon from '@mui/icons-material/VideoCall';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Snackbar, Alert, Fade, IconButton, InputAdornment } from '@mui/material';
-import { Visibility, VisibilityOff, Person, VpnKey } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { AuthContext } from '../contexts/AuthContext';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#2563eb', // Professional blue
-      dark: '#1d4ed8',
-      light: '#3b82f6',
-    },
-    secondary: {
-      main: '#64748b', // Neutral slate
-      dark: '#475569',
-      light: '#94a3b8',
-    },
-    background: {
-      default: '#f8fafc',
-      paper: '#ffffff',
-    },
-    text: {
-      primary: '#0f172a',
-      secondary: '#64748b',
-    },
-    grey: {
-      50: '#f8fafc',
-      100: '#f1f5f9',
-      200: '#e2e8f0',
-      300: '#cbd5e1',
-      900: '#0f172a',
-    },
-  },
-  typography: {
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    h4: {
-      fontWeight: 700,
-      color: '#0f172a',
-    },
-    h6: {
-      fontWeight: 500,
-    },
-    body1: {
-      fontSize: '0.95rem',
-      lineHeight: 1.6,
-    },
-  },
-  components: {
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            borderRadius: 8,
-            backgroundColor: '#ffffff',
-            transition: 'all 0.2s ease',
-            '& fieldset': {
-              borderColor: '#e2e8f0',
-              borderWidth: 1.5,
-            },
-            '&:hover fieldset': {
-              borderColor: '#cbd5e1',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: '#2563eb',
-              borderWidth: 2,
-            },
-          },
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-          textTransform: 'none',
-          fontWeight: 600,
-          fontSize: '0.95rem',
-          padding: '10px 24px',
-          transition: 'all 0.2s ease',
-        },
-        contained: {
-          backgroundColor: '#2563eb',
-          boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-          '&:hover': {
-            backgroundColor: '#1d4ed8',
-            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-          },
-        },
-        outlined: {
-          borderColor: '#e2e8f0',
-          color: '#64748b',
-          borderWidth: 1.5,
-          '&:hover': {
-            borderColor: '#cbd5e1',
-            backgroundColor: '#f8fafc',
-            borderWidth: 1.5,
-          },
-        },
-        text: {
-          color: '#2563eb',
-          '&:hover': {
-            backgroundColor: 'rgba(37, 99, 235, 0.04)',
-          },
-        },
-      },
-    },
-    MuiAlert: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
-    },
-  },
-});
+import Navbar from '../components/Navbar';
 
 export default function Authentication() {
   const [username, setUsername] = React.useState('');
@@ -137,7 +16,8 @@ export default function Authentication() {
   const [isLoading, setIsLoading] = React.useState(false);
   const { handleRegister, handleLogin } = React.useContext(AuthContext);
 
-  const handleAuth = async () => {
+  const handleAuth = async (e) => {
+    if (e) e.preventDefault();
     setIsLoading(true);
     try {
       if (formState === 0) {
@@ -172,269 +52,181 @@ export default function Authentication() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        
-        {/* Left Side - Brand Section */}
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            position: 'relative',
-            backgroundColor: '#0f172a',
+    <div style={{ minHeight: '100vh', paddingBottom: '60px' }}>
+      {/* Unified RamAIn Navbar */}
+      <Navbar />
+
+      <div className="ramain-auth-card">
+        {/* Header Section */}
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            background: 'var(--accent-lime)',
+            borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundImage: 'url(https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              opacity: 0.1,
-            },
-          }}
-        >
-          <Box sx={{ position: 'relative', textAlign: 'center', color: 'white', px: 6 }}>
-            <Box
-              sx={{
-                width: 80,
-                height: 80,
-                backgroundColor: '#2563eb',
-                borderRadius: '16px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                mx: 'auto',
-                mb: 3,
-              }}
-            >
-              <VideoCallIcon sx={{ fontSize: 40, color: 'white' }} />
-            </Box>
-            <Typography variant="h3" sx={{ fontWeight: 700, mb: 2, color: 'white' }}>
-              PeerSpace
-            </Typography>
-            <Typography variant="h6" sx={{ 
-              color: '#94a3b8', 
-              maxWidth: 400, 
-              mx: 'auto',
-              fontWeight: 400,
-              lineHeight: 1.6 
-            }}>
-             Whether you're catching up with friends, studying together, or sharing a laugh — this platform brings you closer
-            </Typography>
-          </Box>
-        </Grid>
+            fontSize: '1.4rem',
+            margin: '0 auto 16px',
+            boxShadow: '0 4px 12px rgba(197, 255, 74, 0.4)'
+          }}>
+            🔐
+          </div>
 
-        {/* Right Side - Form */}
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} 
-          sx={{ 
-            backgroundColor: '#ffffff',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <Fade in timeout={600}>
-            <Box
-              sx={{
-                mx: 6,
-                my: 4,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: '100%',
-                maxWidth: 400,
-              }}
-            >
-              {/* Avatar */}
-              <Avatar sx={{ 
-                width: 48, 
-                height: 48,
-                backgroundColor: '#2563eb',
-                mb: 3,
-              }}>
-                <LockOutlinedIcon sx={{ fontSize: 24 }} />
-              </Avatar>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: '800', marginBottom: '10px', letterSpacing: '-0.03em' }}>
+            {formState === 0 ? (
+              <>Welcome <span className="lime-highlight">back</span></>
+            ) : (
+              <>Create <span className="lime-highlight">account</span></>
+            )}
+          </h1>
 
-              {/* Title */}
-              <Typography component="h1" variant="h4" sx={{ mb: 1, textAlign: 'center' }}>
-                {formState === 0 ? 'Welcome back' : 'Create account'}
-              </Typography>
-              
-              <Typography variant="body1" sx={{ 
-                mb: 4, 
-                color: 'text.secondary', 
-                textAlign: 'center' 
-              }}>
-                {formState === 0 ? 'Please sign in to your account' : 'Please fill in your information to get started'}
-              </Typography>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>
+            Whether you're catching up with friends, studying together, or sharing a laugh — this platform brings you closer.
+          </p>
+        </div>
 
-              {/* Toggle Buttons */}
-              <Box sx={{ 
-                display: 'flex', 
-                gap: 1, 
-                mb: 4, 
-                p: 0.5,
-                backgroundColor: '#f1f5f9',
-                borderRadius: 1.5,
-                width: '100%',
-              }}>
-                <Button
-                  variant={formState === 0 ? 'contained' : 'text'}
-                  onClick={() => setFormState(0)}
-                  sx={{ 
-                    flex: 1,
-                    py: 1,
-                    ...(formState !== 0 && { 
-                      color: 'text.secondary',
-                      '&:hover': { backgroundColor: 'transparent' }
-                    })
-                  }}
-                >
-                  Sign In
-                </Button>
-                <Button
-                  variant={formState === 1 ? 'contained' : 'text'}
-                  onClick={() => setFormState(1)}
-                  sx={{ 
-                    flex: 1,
-                    py: 1,
-                    ...(formState !== 1 && { 
-                      color: 'text.secondary',
-                      '&:hover': { backgroundColor: 'transparent' }
-                    })
-                  }}
-                >
-                  Sign Up
-                </Button>
-              </Box>
+        {/* Tab Toggle Bar */}
+        <div style={{
+          display: 'flex',
+          background: '#F3F4F6',
+          padding: '6px',
+          borderRadius: '14px',
+          marginBottom: '28px',
+          border: '1px solid var(--border-light)'
+        }}>
+          <button
+            type="button"
+            onClick={() => { setFormState(0); setError(''); }}
+            style={{
+              flex: 1,
+              padding: '10px',
+              borderRadius: '10px',
+              border: 'none',
+              fontWeight: '700',
+              fontSize: '0.92rem',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              background: formState === 0 ? '#111827' : 'transparent',
+              color: formState === 0 ? '#FFFFFF' : 'var(--text-secondary)',
+              boxShadow: formState === 0 ? '0 2px 8px rgba(0,0,0,0.15)' : 'none'
+            }}
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            onClick={() => { setFormState(1); setError(''); }}
+            style={{
+              flex: 1,
+              padding: '10px',
+              borderRadius: '10px',
+              border: 'none',
+              fontWeight: '700',
+              fontSize: '0.92rem',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              background: formState === 1 ? '#111827' : 'transparent',
+              color: formState === 1 ? '#FFFFFF' : 'var(--text-secondary)',
+              boxShadow: formState === 1 ? '0 2px 8px rgba(0,0,0,0.15)' : 'none'
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
 
-              {/* Form */}
-              <Box component="form" noValidate sx={{ width: '100%' }}>
-                {formState === 1 && (
-                  <Fade in timeout={300}>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      label="Full Name"
-                      value={name}
-                      autoFocus
-                      onChange={(e) => setName(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Person sx={{ color: 'text.secondary', fontSize: 20 }} />
-                          </InputAdornment>
-                        ),
-                      }}
-                      sx={{ mb: 2 }}
-                    />
-                  </Fade>
-                )}
-
-                <TextField
-                  margin="normal"
+        {/* Form Fields */}
+        <form onSubmit={handleAuth}>
+          {formState === 1 && (
+            <Fade in timeout={300}>
+              <div className="ramain-form-group">
+                <label className="ramain-label">Full Name</label>
+                <input
+                  type="text"
                   required
-                  fullWidth
-                  label="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  className="ramain-input"
+                  placeholder="Enter your full name"
+                  value={name}
+                  autoFocus
+                  onChange={(e) => setName(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Person sx={{ color: 'text.secondary', fontSize: 20 }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{ mb: 2 }}
                 />
+              </div>
+            </Fade>
+          )}
 
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <VpnKey sx={{ color: 'text.secondary', fontSize: 20 }} />
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => setShowPassword(!showPassword)}
-                          edge="end"
-                          sx={{ color: 'text.secondary' }}
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{ mb: 3 }}
-                />
+          <div className="ramain-form-group">
+            <label className="ramain-label">Username</label>
+            <input
+              type="text"
+              required
+              className="ramain-input"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+          </div>
 
-                {error && (
-                  <Fade in>
-                    <Alert severity="error" sx={{ mb: 2 }}>
-                      {error}
-                    </Alert>
-                  </Fade>
-                )}
+          <div className="ramain-form-group">
+            <label className="ramain-label">Password</label>
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                required
+                className="ramain-input"
+                placeholder="Enter your secret password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={handleKeyPress}
+                style={{ paddingRight: '44px' }}
+              />
+              <IconButton
+                onClick={() => setShowPassword(!showPassword)}
+                style={{ position: 'absolute', right: '8px', color: 'var(--text-muted)' }}
+                size="small"
+              >
+                {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+              </IconButton>
+            </div>
+          </div>
 
-                <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{ mb: 3, py: 1.5 }}
-                  onClick={handleAuth}
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Please wait...' : (formState === 0 ? 'Sign In' : 'Create Account')}
-                </Button>
-              </Box>
+          {error && (
+            <Fade in>
+              <Alert severity="error" sx={{ mb: 3, borderRadius: '10px' }}>
+                {error}
+              </Alert>
+            </Fade>
+          )}
 
-              {/* Footer */}
-              <Typography variant="body2" sx={{ color: 'text.secondary', textAlign: 'center' }}>
-                {formState === 0 ? "Don't have an account? " : "Already have an account? "}
-                <Button
-                  variant="text"
-                  onClick={() => setFormState(formState === 0 ? 1 : 0)}
-                  sx={{ 
-                    textTransform: 'none', 
-                    fontWeight: 500,
-                    p: 0,
-                    minWidth: 'auto',
-                  }}
-                >
-                  {formState === 0 ? 'Sign up' : 'Sign in'}
-                </Button>
-              </Typography>
-            </Box>
-          </Fade>
-        </Grid>
-      </Grid>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="btn-lime"
+            style={{ width: '100%', padding: '14px', fontSize: '1rem', marginTop: '8px' }}
+          >
+            {isLoading ? 'Please wait...' : (formState === 0 ? 'Sign In to Account' : 'Create Free Account')}
+          </button>
+        </form>
 
-      <Snackbar open={open} autoHideDuration={4000} onClose={() => setOpen(false)}>
-        <Alert onClose={() => setOpen(false)} severity="success">
+        {/* Footer Toggle */}
+        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '0.92rem', color: 'var(--text-secondary)' }}>
+          {formState === 0 ? "Don't have an account yet? " : "Already registered? "}
+          <span
+            onClick={() => setFormState(formState === 0 ? 1 : 0)}
+            style={{ color: '#111827', fontWeight: '700', cursor: 'pointer', textDecoration: 'underline' }}
+          >
+            {formState === 0 ? 'Sign up here' : 'Sign in here'}
+          </span>
+        </div>
+      </div>
+
+      <Snackbar open={open} autoHideDuration={4000} onClose={() => setOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+        <Alert onClose={() => setOpen(false)} severity="success" sx={{ borderRadius: '10px', fontWeight: '600' }}>
           {message}
         </Alert>
       </Snackbar>
-    </ThemeProvider>
+    </div>
   );
 }

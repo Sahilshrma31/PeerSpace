@@ -12,6 +12,7 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat'
 import server from '../environment';
+import Navbar from '../components/Navbar';
 
 const server_url = server;
 
@@ -128,13 +129,10 @@ export default function VideoMeetComponent() {
     };
 
     useEffect(() => {
-        if (video !== undefined && audio !== undefined) {
+        if (video !== undefined && audio !== undefined && !window.localStream) {
             getUserMedia();
             console.log("SET STATE HAS ", video, audio);
-
         }
-
-
     }, [video, audio])
     let getMedia = () => {
         setVideo(videoAvailable);
@@ -414,12 +412,18 @@ let getUserMedia = () => {
     }
 
     let handleVideo = () => {
-        setVideo(!video);
-        // getUserMedia();
+        const nextState = !video;
+        setVideo(nextState);
+        window.localStream?.getVideoTracks().forEach(track => {
+            track.enabled = nextState;
+        });
     }
     let handleAudio = () => {
-        setAudio(!audio)
-        // getUserMedia();
+        const nextState = !audio;
+        setAudio(nextState);
+        window.localStream?.getAudioTracks().forEach(track => {
+            track.enabled = nextState;
+        });
     }
 
     useEffect(() => {
@@ -480,21 +484,76 @@ let getUserMedia = () => {
     return (
         <div>
 
-            {askForUsername === true ?
+            {askForUsername === true ? (
+                <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
+                    <Navbar />
 
-                <div>
+                    <div className="ramain-hero-container" style={{ textAlign: 'center', maxWidth: '820px' }}>
+                        <div style={{
+                            display: 'inline-block',
+                            background: '#111827',
+                            color: 'var(--accent-lime)',
+                            fontWeight: '700',
+                            fontSize: '0.88rem',
+                            padding: '6px 16px',
+                            borderRadius: '20px',
+                            marginBottom: '20px',
+                            border: '1px solid #374151'
+                        }}>
+                            🚪 Pre-Call Lobby
+                        </div>
 
+                        <h2 className="ramain-title" style={{ fontSize: '2.8rem', marginBottom: '16px' }}>
+                            Enter into <span className="lime-highlight">Lobby</span>
+                        </h2>
 
-                    <h2>Enter into Lobby </h2>
-                    <TextField id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
-                    <Button variant="contained" onClick={connect}>Connect</Button>
+                        <p className="ramain-subtitle" style={{ marginBottom: '32px' }}>
+                            Test your camera preview below, enter your display username, and join the room when ready.
+                        </p>
 
+                        <div style={{
+                            width: '100%',
+                            maxWidth: '640px',
+                            margin: '0 auto 28px',
+                            background: '#0F172A',
+                            borderRadius: '20px',
+                            overflow: 'hidden',
+                            border: '2px solid #111827',
+                            boxShadow: '0 12px 30px rgba(0,0,0,0.15)'
+                        }}>
+                            <video
+                                ref={localVideoref}
+                                autoPlay
+                                muted
+                                style={{
+                                    width: '100%',
+                                    height: '360px',
+                                    objectFit: 'cover',
+                                    display: 'block',
+                                    background: '#0F172A'
+                                }}
+                            ></video>
+                        </div>
 
-                    <div>
-                        <video ref={localVideoref} autoPlay muted></video>
+                        <div className="ramain-input-capsule" style={{ maxWidth: '520px' }}>
+                            <div className="ramain-capsule-icon">
+                                👤
+                            </div>
+                            <input
+                                type="text"
+                                className="ramain-capsule-input"
+                                placeholder="Enter your display username..."
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                                onKeyPress={e => e.key === 'Enter' && connect()}
+                            />
+                            <button onClick={connect} type="button" className="btn-lime">
+                                Connect →
+                            </button>
+                        </div>
                     </div>
-
-                </div> :
+                </div>
+            ) :
 
 
                 <div className={styles.meetVideoContainer}>

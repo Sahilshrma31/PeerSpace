@@ -1,98 +1,436 @@
+/* ==========================================================================
+   RAMAIN.AI GLOBAL DESIGN SYSTEM FOR PEERSPACE
+   ========================================================================== */
+
+.App {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Floating Navigation Bar (Exact RamAIn Pill Navbar) */
+.ramain-navbar-wrapper {
+  position: sticky;
+  top: 16px;
+  z-index: 1000;
+  padding: 0 20px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.ramain-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.ramain-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  cursor: pointer;
+}
+
+.ramain-logo-icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--accent-lime);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #111827;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(197, 255, 74, 0.4);
+}
+
+.ramain-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.ramain-nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.ramain-nav-link:hover {
+  color: var(--text-primary);
+  background-color: #F3F4F6;
+}
+
+.ramain-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Button Variants */
+.btn-lime {
+  background-color: var(--accent-lime);
+  color: #111827;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #B3E63B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(197, 255, 74, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-lime:hover {
+  background-color: var(--accent-lime-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(197, 255, 74, 0.5);
+}
+
+.btn-dark {
+  background-color: var(--btn-dark);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #27272A;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-dark:hover {
+  background-color: var(--btn-dark-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline {
+  background-color: #FFFFFF;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-outline:hover {
+  background-color: #F8F9FA;
+  border-color: #9CA3AF;
+}
+
+/* RamAIn Main Container / Card Box */
+.ramain-hero-container {
+  max-width: 1080px;
+  margin: 30px auto 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 60px 50px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 4px 10px -2px rgba(0, 0, 0, 0.02);
+  position: relative;
+}
+
+/* Typography & Lime Highlight Box */
+.ramain-title {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.lime-highlight {
+  background-color: var(--accent-lime);
+  color: #111827;
+  padding: 2px 14px;
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(197, 255, 74, 0.3);
+}
+
+/* Marker / Corner dots on highlight box just like RamAIn screenshot */
+.lime-highlight::before,
+.lime-highlight::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #111827;
+  border-radius: 50%;
+}
+.lime-highlight::before {
+  top: -3px;
+  left: -3px;
+}
+.lime-highlight::after {
+  bottom: -3px;
+  right: -3px;
+}
+
+.ramain-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto 36px;
+  font-weight: 400;
+}
+
+/* Capsule / Bar Input inside Hero (from Screenshot 1) */
+.ramain-input-capsule {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-light);
+  border-radius: 16px;
+  padding: 8px 10px 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ramain-input-capsule:focus-within {
+  border-color: #111827;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+}
+
+.ramain-capsule-icon {
+  width: 34px;
+  height: 34px;
+  background: #18181B;
+  color: #FFFFFF;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.ramain-capsule-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  background: transparent;
+}
+
+.ramain-capsule-input::placeholder {
+  color: #9CA3AF;
+  font-weight: 400;
+}
+
+/* Section Header (from Screenshot 2) */
+.ramain-section-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  text-align: center;
+  max-width: 780px;
+  margin: 60px auto 40px;
+  line-height: 1.25;
+}
+
+/* Feature Split Cards (from Screenshot 2) */
+.ramain-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto 60px;
+}
+
+.ramain-feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.ramain-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
+  border-color: var(--border-medium);
+}
+
+.ramain-feature-img-box {
+  background: #F0FDF4;
+  border-bottom: 1px solid var(--border-light);
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ramain-feature-img-box.bg-blue {
+  background: #EFF6FF;
+}
+
+.ramain-feature-img-box.bg-purple {
+  background: #FAF5FF;
+}
+
+.ramain-feature-img-box img {
+  max-height: 180px;
+  max-width: 90%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.ramain-feature-card:hover .ramain-feature-img-box img {
+  transform: scale(1.05);
+}
+
+.ramain-feature-content {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.ramain-feature-heading {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.ramain-feature-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Authentication / Form Cards (RamAIn Style) */
+.ramain-auth-card {
+  max-width: 480px;
+  margin: 40px auto;
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+}
+
+.ramain-form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.ramain-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ramain-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-light);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: #F8F9FA;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.ramain-input:focus {
+  background: #FFFFFF;
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.05);
+}
+
+/* Responsive Utilities */
 @media (max-width: 768px) {
-  .landingMainContainer {
-    flex-direction: column-reverse;  /* Stack image below text */
-    padding: 1.5rem 1rem;  /* Added top/bottom padding */
-    height: auto;
-    gap: 2.5rem;  /* Slightly more space between elements */
-    text-align: center;
-    margin-bottom: 2rem;  /* Breathing space at bottom */
+  .ramain-title {
+    font-size: 2.4rem;
   }
   
-  .landingMainContainer > div:nth-child(1) {
-    font-size: 1.6rem;
-    padding: 0 0.5rem;  /* Side padding for text */
+  .ramain-section-title {
+    font-size: 1.8rem;
+    margin: 40px auto 28px;
   }
   
-  .landingMainContainer > div:nth-child(1) div[role='button'] {
-    margin: 1rem auto;  /* More top/bottom margin */
-    padding: 1rem 1.5rem;  /* More comfortable button padding */
-    min-height: 48px;  /* Touch-friendly minimum */
+  .ramain-grid-2 {
+    grid-template-columns: 1fr;
   }
   
-  .landingMainContainer > div:nth-child(2) img {
-    width: 88vw;  /* Slightly smaller to add side margins */
-    height: auto;
-    max-height: 35vh;  /* Bit smaller for better proportions */
-    border-radius: 12px;  /* Slightly more rounded */
-    margin: 0 auto;
+  .ramain-hero-container {
+    padding: 36px 20px;
+    margin: 20px 12px 30px;
   }
   
-  .navBar, .landingPageContainer nav {
+  .ramain-nav-links {
+    display: none;
+  }
+
+  .ramain-input-capsule {
     flex-direction: column;
-    gap: 1.5rem;  /* More space between nav items */
-    text-align: center;
-    padding: 1rem 0.5rem;  /* Padding for breathing room */
+    padding: 12px;
   }
-  
-  .landingPageContainer nav h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;  /* Space below heading */
-  }
-  
-  .landingPageContainer nav .navlist {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;  /* Slightly more gap */
-    padding: 0 0.5rem;  /* Side padding */
-  }
-  
-  .meetContainer {
-    flex-direction: column;
-    height: auto;
-    gap: 2.5rem;  /* More space between sections */
-    padding: 1.5rem 15px 2rem;  /* More padding all around */
-    margin-top: 1rem;
-  }
-  
-  .rightPanel > img {
-    width: 88vw;  /* Consistent with other images */
-    height: auto;
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-  
-  .leftPanel {
-    justify-content: center;
-    text-align: center;
-    padding: 1rem 0.5rem;  /* Internal padding */
-  }
-  
-  /* Additional touch-friendly improvements */
-  button, [role='button'] {
-    min-height: 44px;  /* iOS recommendation */
-    padding: 0.75rem 1.25rem;
-  }
-  
-  /* Better spacing for text elements */
-  p, div {
-    line-height: 1.6;  /* Better readability */
-  }
-  
-  /* Ensure proper margins on smaller devices */
-  @media (max-width: 480px) {
-    .landingMainContainer {
-      padding: 1rem 0.75rem;
-      gap: 2rem;
-    }
-    
-    .landingMainContainer > div:nth-child(2) img,
-    .rightPanel > img {
-      width: 92vw;  /* Bit more width on very small screens */
-    }
-    
-    .meetContainer {
-      padding-inline: 12px;
-      gap: 2rem;
-    }
+
+  .ramain-capsule-input {
+    width: 100%;
+    padding: 6px 0;
   }
 }
