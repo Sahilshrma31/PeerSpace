@@ -126,6 +126,94 @@ export default function History() {
                         ))}
                     </div>
                 )}
+
+                {/* Saved Collaborative Session Notes Section */}
+                <div style={{ marginTop: '64px', borderTop: '2px dashed var(--border-light)', paddingTop: '48px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+                        <div>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: '800', color: '#111827', margin: 0 }}>
+                                📚 Auto-Saved Session Notes
+                            </h2>
+                            <p style={{ color: 'var(--text-secondary)', margin: '6px 0 0', fontSize: '0.95rem' }}>
+                                Notes collaboratively typed during your meetings are saved locally right when your sessions end.
+                            </p>
+                        </div>
+                    </div>
+
+                    {(() => {
+                        let savedList = [];
+                        try {
+                            savedList = JSON.parse(localStorage.getItem('peerspace_saved_notes') || '[]');
+                        } catch (e) { }
+
+                        if (savedList.length === 0) {
+                            return (
+                                <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '16px', padding: '40px 24px', textAlign: 'center', color: '#64748B' }}>
+                                    No locally saved notes yet. When you complete a study session or leave a room with notes typed, they will appear right here for easy downloading!
+                                </div>
+                            );
+                        }
+
+                        return (
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '20px' }}>
+                                {savedList.map((item, idx) => (
+                                    <div key={item.id || idx} style={{ background: '#FFFFFF', border: '1px solid var(--border-light)', borderRadius: '18px', padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
+                                        <div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                                                <span style={{ background: '#E8F8B6', color: '#111827', fontWeight: '700', fontSize: '0.78rem', padding: '4px 10px', borderRadius: '8px' }}>
+                                                    📚 {item.topic || 'PeerSpace Study'}
+                                                </span>
+                                                <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: '500' }}>
+                                                    {item.date || 'Recently'}
+                                                </span>
+                                            </div>
+                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#111827', marginBottom: '8px' }}>
+                                                🎯 {item.goal || 'Shared Study Goal'}
+                                            </h3>
+                                            <div style={{ background: '#F8FAFC', border: '1px solid #F1F5F9', borderRadius: '10px', padding: '12px', fontSize: '0.88rem', color: item.notes ? '#334155' : '#94A3B8', whiteSpace: 'pre-wrap', fontFamily: item.notes ? 'monospace' : 'inherit', maxHeight: '120px', overflowY: 'auto', marginBottom: '16px' }}>
+                                                {item.notes || 'No text written during this session.'}
+                                            </div>
+                                        </div>
+
+                                        <div style={{ display: 'flex', gap: '10px', paddingTop: '14px', borderTop: '1px solid #F1F5F9' }}>
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    const content = `# PeerSpace Study Session Notes\n\n**Topic:** ${item.topic || '—'}\n**Goal:** ${item.goal || '—'}\n**Date:** ${item.date || new Date().toLocaleDateString()}\n**Pomodoros Completed:** ${item.completedSessions || 0} / ${item.totalSessions || 4}\n\n---\n\n## Shared Notes\n\n${item.notes || 'No notes recorded.'}\n`;
+                                                    const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+                                                    const url = URL.createObjectURL(blob);
+                                                    const link = document.createElement('a');
+                                                    link.href = url;
+                                                    link.download = `${(item.topic || 'PeerSpace').replace(/[^a-zA-Z0-9]/g, '_')}_Notes.md`;
+                                                    document.body.appendChild(link);
+                                                    link.click();
+                                                    document.body.removeChild(link);
+                                                    URL.revokeObjectURL(url);
+                                                }}
+                                                style={{ flex: 1, background: 'var(--accent-lime, #C5FF4A)', color: '#111827', border: 'none', padding: '8px 14px', borderRadius: '10px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
+                                            >
+                                                📥 Download (.md)
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    if (item.notes) {
+                                                        navigator.clipboard?.writeText(item.notes);
+                                                        alert('Notes copied to clipboard!');
+                                                    }
+                                                }}
+                                                disabled={!item.notes}
+                                                style={{ background: '#F1F5F9', color: item.notes ? '#334155' : '#94A3B8', border: 'none', padding: '8px 14px', borderRadius: '10px', fontWeight: '600', fontSize: '0.85rem', cursor: item.notes ? 'pointer' : 'not-allowed' }}
+                                            >
+                                                📋 Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        );
+                    })()}
+                </div>
             </div>
         </div>
     );

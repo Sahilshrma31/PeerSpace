@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import PeerSpaceLogoIcon from './PeerSpaceLogoIcon';
 
 export default function Navbar() {
   const router = useNavigate();
@@ -14,20 +15,40 @@ export default function Navbar() {
   return (
     <div className="ramain-navbar-wrapper">
       <nav className="ramain-navbar">
-        {/* Brand Logo (RamAIn Icon + Text) */}
-        <Link to={isAuthenticated ? "/home" : "/"} className="ramain-logo">
-          <div className="ramain-logo-icon">▶</div>
+        {/* Brand Logo (PeerSpace Icon + Text) */}
+        <Link to="/home" className="ramain-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <PeerSpaceLogoIcon size={34} />
           <span>PeerSpace</span>
         </Link>
 
         {/* Center Nav Links (RamAIn Style) */}
         <div className="ramain-nav-links">
-          <Link to={isAuthenticated ? "/home" : "/"} className="ramain-nav-link">
+          <Link to="/home" className="ramain-nav-link">
             Platform
           </Link>
-          <Link to={isAuthenticated ? "/history" : "/auth"} className="ramain-nav-link">
-            {isAuthenticated ? "Call History" : "Features"}
-          </Link>
+          <span 
+            onClick={() => {
+              if (location.pathname !== '/home' && location.pathname !== '/') {
+                router('/home');
+                setTimeout(() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }), 150);
+              } else {
+                document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+              }
+            }} 
+            className="ramain-nav-link" 
+            style={{ cursor: 'pointer' }}
+          >
+            Features
+          </span>
+          {isAuthenticated ? (
+            <Link to="/history" className="ramain-nav-link">
+              Call History
+            </Link>
+          ) : (
+            <Link to="/auth" className="ramain-nav-link">
+              Call History
+            </Link>
+          )}
           <span 
             onClick={() => router("/aljk23")} 
             className="ramain-nav-link" 
@@ -35,9 +56,6 @@ export default function Navbar() {
           >
             Guest Room
           </span>
-          <a href="#about" className="ramain-nav-link">
-            Docs
-          </a>
         </div>
 
         {/* Action Buttons */}

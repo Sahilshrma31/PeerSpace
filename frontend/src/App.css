@@ -400,18 +400,267 @@
   box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.05);
 }
 
+/* ==========================================================================
+   PeerSpace — Vector Bento Grid & Split Card Styles (Inspiration Match)
+   ========================================================================== */
+
+/* Split Cards Section (Inspiration Image 2) */
+.peerspace-section-header {
+  max-width: 860px;
+  margin: 70px auto 40px;
+  text-align: center;
+}
+
+.peerspace-section-title {
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--text-primary, #111827);
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.peerspace-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1160px;
+  margin: 0 auto 60px;
+}
+
+.peerspace-split-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.peerspace-split-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+.peerspace-split-img {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.peerspace-split-img.bg-lime {
+  background-color: #E8F8B6;
+}
+
+.peerspace-split-img.bg-lavender {
+  background-color: #E4E0FD;
+}
+
+.peerspace-split-img-title {
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 14px;
+  align-self: flex-start;
+  position: relative;
+  z-index: 3;
+}
+
+.peerspace-split-content {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #FFFFFF;
+  color: #111827;
+}
+
+.peerspace-split-heading {
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 14px;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.peerspace-split-desc {
+  font-size: 0.98rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Bento Grid Section (Inspiration Image 1) */
+.peerspace-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1160px;
+  margin: 0 auto 80px;
+}
+
+.peerspace-bento-card {
+  border-radius: 24px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 340px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.peerspace-bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.peerspace-bento-card.col-span-2 {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.peerspace-bento-card.bg-green {
+  background: #E8F8B6;
+  color: #111827;
+}
+
+.peerspace-bento-card.bg-lavender {
+  background: #E4E0FD;
+  color: #111827;
+}
+
+.peerspace-bento-card.bg-lime {
+  background: #DCFCCB;
+  color: #111827;
+}
+
+.bento-header-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.bento-title {
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.bento-desc {
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0;
+}
+
+.bento-vector-wrap {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.bento-vector-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* Vector Diagram Specific Animations & Styling */
+.vector-wireframe-svg {
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.peerspace-bento-card:hover .vector-wireframe-svg,
+.peerspace-split-card:hover .vector-wireframe-svg {
+  transform: scale(1.06) rotate(1deg);
+}
+
 /* Responsive Utilities */
+@media (max-width: 1024px) {
+  .peerspace-split-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .peerspace-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .peerspace-bento-card.col-span-2 {
+    grid-column: span 2;
+  }
+}
+
 @media (max-width: 768px) {
   .ramain-title {
     font-size: 2.4rem;
   }
   
-  .ramain-section-title {
+  .ramain-section-title,
+  .peerspace-section-title {
     font-size: 1.8rem;
     margin: 40px auto 28px;
   }
   
   .ramain-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .peerspace-split-card {
+    grid-template-columns: 1fr;
+  }
+
+  .peerspace-split-img {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    min-height: 200px;
+  }
+
+  .peerspace-bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .peerspace-bento-card.col-span-2 {
+    grid-column: span 1;
     grid-template-columns: 1fr;
   }
   

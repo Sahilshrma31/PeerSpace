@@ -76,6 +76,47 @@ code {
   100% { transform: rotate(360deg); }
 }
 
+@keyframes vectorDriftSlow {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+  33% { transform: translate(24px, -18px) rotate(5deg) scale(1.04); }
+  66% { transform: translate(-16px, 18px) rotate(-4deg) scale(0.97); }
+}
+
+@keyframes vectorWaveSlow {
+  0%, 100% { transform: translateY(0px) rotate(-8deg); }
+  50% { transform: translateY(-25px) rotate(8deg); }
+}
+
+@keyframes vectorOrbitGentle {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.ambient-vector-1 {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.16;
+  animation: vectorDriftSlow 24s ease-in-out infinite;
+}
+
+.ambient-vector-2 {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.14;
+  animation: vectorWaveSlow 18s ease-in-out infinite;
+}
+
+.ambient-vector-3 {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.15;
+  animation: vectorOrbitGentle 45s linear infinite;
+}
+
 .vector-pulse-dot {
   display: inline-block;
   width: 8px;
@@ -105,4 +146,102 @@ code {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+/* ==========================================================================
+   PeerSpace Soothing Vector Gliders (Custom Range Controls & Precision Rulers)
+   ========================================================================== */
+.peerspace-glider-box {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-medium, #E2E8F0);
+  border-radius: 18px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.peerspace-glider-box:focus-within, .peerspace-glider-box:hover {
+  border-color: #111827;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.peerspace-vector-glider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 6px;
+  background: #E2E8F0;
+  outline: none;
+  cursor: pointer;
+  margin: 12px 0 8px;
+}
+
+/* Chrome / Safari / Edge Glider Thumb */
+.peerspace-vector-glider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111827;
+  border: 3.5px solid var(--accent-lime, #C5FF4A);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.peerspace-vector-glider::-webkit-slider-thumb:hover {
+  transform: scale(1.16);
+  box-shadow: 0 0 0 6px rgba(197, 255, 74, 0.35);
+}
+
+.peerspace-vector-glider:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.22);
+  box-shadow: 0 0 0 8px rgba(197, 255, 74, 0.45);
+}
+
+/* Firefox Glider Thumb */
+.peerspace-vector-glider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111827;
+  border: 3.5px solid var(--accent-lime, #C5FF4A);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.peerspace-vector-glider::-moz-range-thumb:hover {
+  transform: scale(1.16);
+  box-shadow: 0 0 0 6px rgba(197, 255, 74, 0.35);
+}
+
+.peerspace-vector-glider:active::-moz-range-thumb {
+  cursor: grabbing;
+  transform: scale(1.22);
+  box-shadow: 0 0 0 8px rgba(197, 255, 74, 0.45);
+}
+
+.vector-glider-input {
+  width: 68px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: var(--font-display, inherit);
+  text-align: center;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 10px;
+  background: #F8FAFC;
+  color: #111827;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.vector-glider-input:focus {
+  border-color: #111827;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(197, 255, 74, 0.3);
 }
