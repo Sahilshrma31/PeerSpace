@@ -71,7 +71,11 @@ export default function History() {
                         padding: '60px 40px',
                         textAlign: 'center'
                     }}>
-                        <div style={{ fontSize: '2.5rem', marginBottom: '16px' }}>📂</div>
+                        <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
                         <h3 style={{ fontSize: '1.4rem', fontWeight: '700', marginBottom: '8px' }}>No meeting activity yet</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', maxWidth: '440px', margin: '0 auto 24px' }}>
                             When you join a meeting room from the dashboard, the room code and entry timestamp will automatically show up here.

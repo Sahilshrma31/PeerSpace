@@ -21,24 +21,34 @@ function HomeComponent() {
     };
 
     return (
-        <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
+        <div style={{ minHeight: '100vh', paddingBottom: '80px', position: 'relative', overflow: 'hidden' }}>
+            {/* Background Vector Animation Orbit Ring */}
+            <svg className="vector-bg-decoration" width="700" height="700" viewBox="0 0 700 700" fill="none" style={{ top: '35%', left: '50%', animation: 'vectorRingSpin 80s linear infinite' }}>
+                <circle cx="350" cy="350" r="320" stroke="var(--border-light)" strokeWidth="1.5" strokeDasharray="12 12" />
+                <circle cx="350" cy="350" r="220" stroke="var(--border-light)" strokeWidth="1" />
+                <circle cx="350" cy="30" r="6" fill="#10B981" />
+                <circle cx="670" cy="350" r="4" fill="var(--accent-lime)" />
+            </svg>
+
             {/* Unified RamAIn Navbar */}
             <Navbar />
 
             {/* Hero Section Card */}
-            <div className="ramain-hero-container" style={{ textAlign: 'center' }}>
+            <div className="ramain-hero-container vector-float" style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
                 <div style={{
-                    display: 'inline-block',
+                    display: 'inline-flex',
+                    alignItems: 'center',
                     background: 'var(--accent-lime-light)',
                     color: '#047857',
                     fontWeight: '700',
                     fontSize: '0.85rem',
-                    padding: '6px 14px',
+                    padding: '6px 16px',
                     borderRadius: '20px',
                     marginBottom: '20px',
                     border: '1px solid #A7F3D0'
                 }}>
-                    ✨ Authenticated Dashboard Active
+                    <span className="vector-pulse-dot"></span>
+                    Authenticated Session Active
                 </div>
 
                 <h1 className="ramain-title" style={{ fontSize: '3.5rem' }}>
@@ -49,11 +59,12 @@ function HomeComponent() {
                 <p className="ramain-subtitle">
                     Enter a meeting code below to launch a secure peer-to-peer WebRTC video room. All joined rooms are automatically logged to your personal activity history.
                 </p>
-
                 {/* Capsule Input Bar */}
                 <form onSubmit={handleJoinVideoCall} className="ramain-input-capsule">
                     <div className="ramain-capsule-icon">
-                        🚀
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+                        </svg>
                     </div>
                     <input
                         type="text"
@@ -72,35 +83,50 @@ function HomeComponent() {
                         type="button" 
                         onClick={() => navigate('/history')} 
                         className="btn-outline"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                     >
-                        📜 View Call History
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        View Call History
                     </button>
                 </div>
             </div>
 
             {/* Split Visual Card with Existing Photo (/logo3.png) */}
-            <div className="ramain-grid-2" style={{ alignItems: 'center' }}>
+            <div className="ramain-grid-2" style={{ alignItems: 'center', position: 'relative', zIndex: 2 }}>
                 <div className="ramain-feature-card" style={{ height: '100%' }}>
-                    <div className="ramain-feature-img-box bg-purple" style={{ height: '280px' }}>
-                        <img src="/logo3.png" alt="PeerSpace Conference" style={{ maxHeight: '220px' }} />
+                    <div className="ramain-feature-img-box bg-purple" style={{ height: '280px', position: 'relative' }}>
+                        {/* Vector Decorative Corner Grids inside feature card */}
+                        <svg style={{ position: 'absolute', top: '16px', left: '16px', opacity: 0.3 }} width="48" height="48" viewBox="0 0 48 48">
+                            <circle cx="6" cy="6" r="2" fill="white" />
+                            <circle cx="24" cy="6" r="2" fill="white" />
+                            <circle cx="42" cy="6" r="2" fill="white" />
+                            <circle cx="6" cy="24" r="2" fill="white" />
+                            <circle cx="24" cy="24" r="2" fill="white" />
+                            <circle cx="42" cy="24" r="2" fill="white" />
+                        </svg>
+                        <img src="/logo3.png" alt="PeerSpace Conference" style={{ maxHeight: '220px', position: 'relative', zIndex: 2 }} />
                     </div>
                 </div>
 
                 <div className="ramain-feature-card" style={{ height: '100%', padding: '40px', justifyContent: 'center' }}>
                     <div style={{
-                        width: '40px',
-                        height: '40px',
+                        width: '44px',
+                        height: '44px',
                         background: '#111827',
                         color: 'white',
-                        borderRadius: '10px',
+                        borderRadius: '12px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontWeight: '800',
-                        marginBottom: '20px',
-                        fontSize: '1.2rem'
+                        marginBottom: '20px'
                     }}>
-                        ▶
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-lime)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7" />
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                        </svg>
                     </div>
                     <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: '800', marginBottom: '16px', letterSpacing: '-0.03em' }}>
                         Agentic-level WebRTC simplicity.
@@ -109,8 +135,12 @@ function HomeComponent() {
                         PeerSpace establishes low-latency mesh connections directly between participants. Share your display screen or chat in parallel with zero extra configuration.
                     </p>
                     <div>
-                        <button onClick={() => navigate('/aljk23')} className="btn-dark">
-                            Test Room: /aljk23
+                        <button onClick={() => navigate('/aljk23')} className="btn-dark" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <polygon points="10 8 16 12 10 16 10 8" />
+                            </svg>
+                            Launch Room /aljk23
                         </button>
                     </div>
                 </div>

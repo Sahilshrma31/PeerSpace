@@ -55,7 +55,7 @@ export default function VideoMeetComponent() {
 
     let [message, setMessage] = useState("");
 
-    let [newMessages, setNewMessages] = useState(3);
+    let [newMessages, setNewMessages] = useState(0);
 
     let [askForUsername, setAskForUsername] = useState(true);
 
@@ -72,10 +72,13 @@ export default function VideoMeetComponent() {
     // }
 
     useEffect(() => {
-        console.log("HELLO")
         getPermissions();
-
-    })
+        // Run only once on mount. Without the empty dependency array this
+        // re-acquires the camera on every render and overwrites
+        // window.localStream (re-enabling all tracks), which silently undoes
+        // the video/audio toggles and resets the stream on chat toggle.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     let getDislayMedia = () => {
         if (screen) {
@@ -134,6 +137,15 @@ export default function VideoMeetComponent() {
             console.log("SET STATE HAS ", video, audio);
         }
     }, [video, audio])
+
+    // When we leave the lobby and enter the call view, the <video> element that
+    // holds localVideoref changes. Re-attach the existing local stream so the
+    // user's own preview isn't blank in the call view.
+    useEffect(() => {
+        if (!askForUsername && localVideoref.current && window.localStream) {
+            localVideoref.current.srcObject = window.localStream;
+        }
+    }, [askForUsername])
     let getMedia = () => {
         setVideo(videoAvailable);
         setAudio(audioAvailable);
@@ -490,7 +502,8 @@ let getUserMedia = () => {
 
                     <div className="ramain-hero-container" style={{ textAlign: 'center', maxWidth: '820px' }}>
                         <div style={{
-                            display: 'inline-block',
+                            display: 'inline-flex',
+                            alignItems: 'center',
                             background: '#111827',
                             color: 'var(--accent-lime)',
                             fontWeight: '700',
@@ -500,7 +513,8 @@ let getUserMedia = () => {
                             marginBottom: '20px',
                             border: '1px solid #374151'
                         }}>
-                            🚪 Pre-Call Lobby
+                            <span className="vector-pulse-dot"></span>
+                            Pre-Call Lobby
                         </div>
 
                         <h2 className="ramain-title" style={{ fontSize: '2.8rem', marginBottom: '16px' }}>
@@ -537,7 +551,10 @@ let getUserMedia = () => {
 
                         <div className="ramain-input-capsule" style={{ maxWidth: '520px' }}>
                             <div className="ramain-capsule-icon">
-                                👤
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
                             </div>
                             <input
                                 type="text"
@@ -606,7 +623,7 @@ let getUserMedia = () => {
                             </IconButton> : <></>}
 
                         <Badge badgeContent={newMessages} max={999} color='orange'>
-                            <IconButton onClick={() => setModal(!showModal)} style={{ color: "white" }}>
+                            <IconButton onClick={() => { showModal ? closeChat() : openChat(); }} style={{ color: "white" }}>
                                 <ChatIcon />                        </IconButton>
                         </Badge>
 

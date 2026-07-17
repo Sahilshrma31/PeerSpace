@@ -71,7 +71,10 @@ export default function Authentication() {
             margin: '0 auto 16px',
             boxShadow: '0 4px 12px rgba(197, 255, 74, 0.4)'
           }}>
-            🔐
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
           </div>
 
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: '800', marginBottom: '10px', letterSpacing: '-0.03em' }}>
