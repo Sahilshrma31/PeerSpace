@@ -17,7 +17,7 @@ export default function Navbar() {
       <nav className="ramain-navbar">
         {/* Brand Logo (PeerSpace Icon + Text) */}
         <Link to="/home" className="ramain-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <PeerSpaceLogoIcon size={34} />
+          <PeerSpaceLogoIcon size={46} />
           <span>PeerSpace</span>
         </Link>
 
