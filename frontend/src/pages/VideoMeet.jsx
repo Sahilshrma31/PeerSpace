@@ -27,13 +27,37 @@ var connections = {};
 const peerConfigConnections = {
     iceServers: [
       { urls: "stun:stun.l.google.com:19302" },
-      {
-        urls: "turn:openrelay.metered.ca:80",
-        username: "openrelayproject",
-        credential: "openrelayproject"
-      }
+      { urls: "stun:stun1.l.google.com:19302" },
+      // Free public TURN (Open Relay by Metered) across multiple ports and
+      // transports so the call can relay when the two peers are on different
+      // networks / behind restrictive NAT-firewalls (e.g. laptop on WiFi and
+      // phone on mobile data), where STUN alone cannot connect. For production
+      // reliability, swap these for your own TURN credentials (Metered/Twilio/coturn).
+      { urls: "turn:openrelay.metered.ca:80", username: "openrelayproject", credential: "openrelayproject" },
+      { urls: "turn:openrelay.metered.ca:443", username: "openrelayproject", credential: "openrelayproject" },
+      { urls: "turn:openrelay.metered.ca:443?transport=tcp", username: "openrelayproject", credential: "openrelayproject" },
+      { urls: "turns:openrelay.metered.ca:443", username: "openrelayproject", credential: "openrelayproject" }
     ]
   }
+
+// Attach a local stream's tracks to a peer connection using the MODERN
+// addTrack API. The old addStream()/onaddstream is removed from the spec and
+// is NOT supported by Safari/iOS, which is why remote video/audio never showed
+// on the iPhone. If a sender of the same kind already exists (after re-acquiring
+// media or screen-sharing), replace its track instead of adding a duplicate
+// (which would throw).
+const attachStream = (pc, stream) => {
+    if (!pc || !stream) return;
+    const senders = pc.getSenders();
+    stream.getTracks().forEach(track => {
+        const existing = senders.find(s => s.track && s.track.kind === track.kind);
+        if (existing) {
+            existing.replaceTrack(track).catch(e => console.log("replaceTrack error:", e));
+        } else {
+            try { pc.addTrack(track, stream); } catch (e) { console.log("addTrack error:", e); }
+        }
+    });
+};
   
 
 export default function VideoMeetComponent() {
@@ -438,7 +462,7 @@ let getUserMediaSuccess = (stream) => {
     for (let id in connections) {
         if (id === socketIdRef.current) continue;
 
-        connections[id].addStream(window.localStream);
+        attachStream(connections[id], window.localStream);
 
         connections[id].createOffer().then((description) => {
             connections[id].setLocalDescription(description)
@@ -472,7 +496,7 @@ let getUserMediaSuccess = (stream) => {
             }
 
             for (let id in connections) {
-                connections[id].addStream(window.localStream);
+                attachStream(connections[id], window.localStream);
 
                 connections[id].createOffer().then((description) => {
                     connections[id].setLocalDescription(description)
@@ -523,7 +547,7 @@ let getUserMedia = () => {
         for (let id in connections) {
             if (id === socketIdRef.current) continue
 
-            connections[id].addStream(window.localStream)
+            attachStream(connections[id], window.localStream)
 
             connections[id].createOffer().then((description) => {
                 connections[id].setLocalDescription(description)
@@ -683,7 +707,10 @@ let getUserMedia = () => {
                     }
 
                     // Wait for their video stream
-                    connections[socketListId].onaddstream = (event) => {
+                    connections[socketListId].ontrack = (event) => {
+                        // ontrack replaces the removed onaddstream (Safari/iOS compatible).
+                        const remoteStream = (event.streams && event.streams[0]) || new MediaStream([event.track]);
+                        if (!remoteStream) return;
                         console.log("BEFORE:", videoRef.current);
                         console.log("FINDING ID: ", socketListId);
 
@@ -695,7 +722,7 @@ let getUserMedia = () => {
                             // Update the stream of the existing video
                             setVideos(videos => {
                                 const updatedVideos = videos.map(video =>
-                                    video.socketId === socketListId ? { ...video, stream: event.stream } : video
+                                    video.socketId === socketListId ? { ...video, stream: remoteStream } : video
                                 );
                                 videoRef.current = updatedVideos;
                                 return updatedVideos;
@@ -705,7 +732,7 @@ let getUserMedia = () => {
                             console.log("CREATING NEW");
                             let newVideo = {
                                 socketId: socketListId,
-                                stream: event.stream,
+                                stream: remoteStream,
                                 autoplay: true,
                                 playsinline: true
                             };
@@ -721,11 +748,11 @@ let getUserMedia = () => {
 
                     // Add the local video stream
                     if (window.localStream !== undefined && window.localStream !== null) {
-                        connections[socketListId].addStream(window.localStream)
+                        attachStream(connections[socketListId], window.localStream)
                     } else {
                         let blackSilence = (...args) => new MediaStream([black(...args), silence()])
                         window.localStream = blackSilence()
-                        connections[socketListId].addStream(window.localStream)
+                        attachStream(connections[socketListId], window.localStream)
                     }
                 })
 
@@ -734,7 +761,7 @@ let getUserMedia = () => {
                         if (id2 === socketIdRef.current) continue
 
                         try {
-                            connections[id2].addStream(window.localStream)
+                            attachStream(connections[id2], window.localStream)
                         } catch (e) { }
 
                         connections[id2].createOffer().then((description) => {
