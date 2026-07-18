@@ -3,7 +3,7 @@ import React from 'react';
 export default function PeerSpaceLogoIcon({ size = 32, className = "", style = {} }) {
   return (
     <img
-      src="/peerspace.png"
+      src={process.env.PUBLIC_URL + '/peerspace.png'}
       alt="PeerSpace Logo"
       width={size}
       height={size}
