@@ -8,7 +8,7 @@ export default function PeerSpaceLogoIcon({ size = 32, className = "", style = {
       width={size}
       height={size}
       className={className}
-      style={{ display: 'inline-block', flexShrink: 0, borderRadius: '26%', objectFit: 'contain', ...style }}
+      style={{ display: 'inline-block', flexShrink: 0, objectFit: 'contain', mixBlendMode: 'multiply', ...style }}
     />
   );
 }
