@@ -3,9 +3,9 @@
   "name": "PeerSpace - Collaborative Study Rooms",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "peerspace.png",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ],
   "start_url": ".",
