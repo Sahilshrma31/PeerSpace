@@ -692,11 +692,25 @@ let getUserMedia = () => {
             })
 
             socketRef.current.on('user-left', (id) => {
-                setVideos((videos) => videos.filter((video) => video.socketId !== id))
+                if (connections[id]) {
+                    try { connections[id].close() } catch (e) { }
+                    delete connections[id]
+                }
+                setVideos((videos) => {
+                    const updated = videos.filter((video) => video.socketId !== id)
+                    videoRef.current = updated
+                    return updated
+                })
             })
 
             socketRef.current.on('user-joined', (id, clients) => {
                 clients.forEach((socketListId) => {
+
+                    // Skip ourselves, and don't recreate a peer connection that already
+                    // exists. user-joined can fire repeatedly with the full client list;
+                    // recreating leaks connections and causes duplicate remote tiles.
+                    if (socketListId === socketIdRef.current) return;
+                    if (connections[socketListId]) return;
 
                     connections[socketListId] = new RTCPeerConnection(peerConfigConnections)
                     // Wait for their ice candidate       
@@ -711,38 +725,27 @@ let getUserMedia = () => {
                         // ontrack replaces the removed onaddstream (Safari/iOS compatible).
                         const remoteStream = (event.streams && event.streams[0]) || new MediaStream([event.track]);
                         if (!remoteStream) return;
-                        console.log("BEFORE:", videoRef.current);
-                        console.log("FINDING ID: ", socketListId);
-
-                        let videoExists = videoRef.current.find(video => video.socketId === socketListId);
-
-                        if (videoExists) {
-                            console.log("FOUND EXISTING");
-
-                            // Update the stream of the existing video
-                            setVideos(videos => {
-                                const updatedVideos = videos.map(video =>
-                                    video.socketId === socketListId ? { ...video, stream: remoteStream } : video
+                        // ontrack fires once PER track (audio + video), so dedupe INSIDE the
+                        // state updater using the authoritative previous state. Checking a ref
+                        // outside the updater races between the two events and renders the same
+                        // peer twice.
+                        setVideos(prev => {
+                            let updated;
+                            if (prev.some(v => v.socketId === socketListId)) {
+                                updated = prev.map(v =>
+                                    v.socketId === socketListId ? { ...v, stream: remoteStream } : v
                                 );
-                                videoRef.current = updatedVideos;
-                                return updatedVideos;
-                            });
-                        } else {
-                            // Create a new video
-                            console.log("CREATING NEW");
-                            let newVideo = {
-                                socketId: socketListId,
-                                stream: remoteStream,
-                                autoplay: true,
-                                playsinline: true
-                            };
-
-                            setVideos(videos => {
-                                const updatedVideos = [...videos, newVideo];
-                                videoRef.current = updatedVideos;
-                                return updatedVideos;
-                            });
-                        }
+                            } else {
+                                updated = [...prev, {
+                                    socketId: socketListId,
+                                    stream: remoteStream,
+                                    autoplay: true,
+                                    playsinline: true
+                                }];
+                            }
+                            videoRef.current = updated;
+                            return updated;
+                        });
                     };
 
 

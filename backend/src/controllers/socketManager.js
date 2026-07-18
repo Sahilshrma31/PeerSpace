@@ -36,7 +36,12 @@ export const connectToSocket = (server) => {
             if (connections[path] === undefined) {
                 connections[path] = []
             }
-            connections[path].push(socket.id)
+            // Idempotent: a reconnecting socket can re-emit join-call. Without this
+            // guard the same socket.id gets pushed twice, inflating the participant
+            // count and the client list broadcast to peers.
+            if (!connections[path].includes(socket.id)) {
+                connections[path].push(socket.id)
+            }
 
             // Actually join the Socket.IO room. Without this, socket.to(path)
             // broadcasts (used by every study-* event below) go to an empty
