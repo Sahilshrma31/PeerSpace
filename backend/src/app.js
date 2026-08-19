@@ -1,14 +1,15 @@
+import "dotenv/config";
+
 import express from 'express';
 
 import {createServer} from "node:http"; //Isse hum custom HTTP server bana sakte hain, jisme later socket.io attach karte hain.
 
-import {Server} from "socket.io";
 import mongoose from "mongoose";
 import { connectToSocket } from './controllers/socketManager.js';
 
 import cors from "cors";
-import { log } from "node:console";
 import userRoutes from "./routes/users.routes.js";
+import { getSecret } from "./utils/jwt.js";
 
 const app=express();
 const server=createServer(app); //Socket.IO ko app.listen() par directly nahi, balki is tarah ke custom server par attach karte hain.
@@ -26,7 +27,10 @@ app.get("/home",(req,res)=>{
 });
 
 const start=async()=>{
-    app.set("mongo_user")
+    // Validate the signing secret at boot, so a misconfigured deploy fails
+    // immediately instead of at the first login attempt.
+    getSecret();
+
     const connectionDb = await mongoose.connect("mongodb+srv://sahilsharma3184:sahils6693@cluster0.tcxscee.mongodb.net/peerspace?retryWrites=true&w=majority");
 
     console.log(`Mongo connected db host: ${connectionDb.connection.host}`);
@@ -35,4 +39,7 @@ const start=async()=>{
         
     })
 }
-start();
+start().catch((e) => {
+    console.error("Failed to start server:", e.message);
+    process.exit(1);
+});

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import PeerSpaceLogoIcon from './PeerSpaceLogoIcon';
+import { clearToken, isTokenValid } from '../utils/token';
 
 export default function Navbar() {
   const router = useNavigate();
   const location = useLocation();
-  const isAuthenticated = !!localStorage.getItem("token");
+  // Checks expiry too, so an expired session stops rendering as signed in.
+  const isAuthenticated = isTokenValid();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    clearToken();
     router("/auth");
   };
 

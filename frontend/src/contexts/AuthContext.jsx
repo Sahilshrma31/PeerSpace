@@ -3,6 +3,7 @@ import httpStatus from "http-status";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import server from "../environment";
+import { clearToken, getToken, setToken } from "../utils/token";
 
 
 export const AuthContext = createContext({});
@@ -10,6 +11,28 @@ export const AuthContext = createContext({});
 const client = axios.create({
     baseURL: `${server}/api/v1/users`
 })
+
+// Attach the JWT to every outgoing request in one place, so no call site has
+// to remember to send it — and so the token never ends up in a URL or a body.
+client.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
+// A rejected token means the session is over: drop it so the app stops
+// pretending the user is still logged in.
+client.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === httpStatus.UNAUTHORIZED) {
+            clearToken();
+        }
+        return Promise.reject(error);
+    }
+);
 
 
 export const AuthProvider = ({ children }) => {
@@ -46,11 +69,9 @@ export const AuthProvider = ({ children }) => {
                 password: password
             });
 
-            console.log(username, password)
-            console.log(request.data)
-
             if (request.status === httpStatus.OK) {
-                localStorage.setItem("token", request.data.token);
+                setToken(request.data.token);
+                setUserData(request.data.user);
                 router("/home")
             }
         } catch (err) {
@@ -58,16 +79,22 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const handleLogout = () => {
+        // Stateless tokens have nothing to revoke server-side, so logging out
+        // is purely a client-side discard. That is the trade-off of JWT: the
+        // token stays technically valid until it expires.
+        clearToken();
+        setUserData({});
+        router("/auth");
+    }
+
     const getHistoryOfUser = async () => {
         try {
-            let request = await client.get("/get_all_activity", {
-                params: {
-                    token: localStorage.getItem("token")
-                }
-            });
+            // No token in the query string — the interceptor sends the
+            // Authorization header, and the server derives the user from it.
+            let request = await client.get("/get_all_activity");
             return request.data
-        } catch
-         (err) {
+        } catch (err) {
             throw err;
         }
     }
@@ -75,7 +102,6 @@ export const AuthProvider = ({ children }) => {
     const addToUserHistory = async (meetingCode) => {
         try {
             let request = await client.post("/add_to_activity", {
-                token: localStorage.getItem("token"),
                 meeting_code: meetingCode
             });
             return request
@@ -86,7 +112,8 @@ export const AuthProvider = ({ children }) => {
 
 
     const data = {
-        userData, setUserData, addToUserHistory, getHistoryOfUser, handleRegister, handleLogin
+        userData, setUserData, addToUserHistory, getHistoryOfUser,
+        handleRegister, handleLogin, handleLogout
     }
 
     return (

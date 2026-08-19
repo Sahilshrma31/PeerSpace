@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import Navbar from '../components/Navbar';
+import { isTokenValid } from '../utils/token';
 
 const STUDY_CODES_LIST = [
     "study-hall",
@@ -45,7 +46,7 @@ function HomeComponent() {
     let handleJoinVideoCall = async (e) => {
         if (e) e.preventDefault();
         if (!meetingCode.trim()) return;
-        if (localStorage.getItem("token") && addToUserHistory) {
+        if (isTokenValid() && addToUserHistory) {
             try {
                 await addToUserHistory(meetingCode.trim());
             } catch (err) {
@@ -174,7 +175,7 @@ function HomeComponent() {
                     border: '1px solid #A7F3D0'
                 }}>
                     <span className="vector-pulse-dot"></span>
-                    {localStorage.getItem("token") ? "Authenticated Session Active" : "PeerSpace Collaborative Study Network Ready"}
+                    {isTokenValid() ? "Authenticated Session Active" : "PeerSpace Collaborative Study Network Ready"}
                 </div>
 
                 <h1 className="ramain-title" style={{ fontSize: '3.5rem' }}>
