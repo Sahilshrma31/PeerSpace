@@ -43,17 +43,25 @@ function HomeComponent() {
         return () => clearTimeout(timer);
     }, [placeholderText, isDeleting, wordIndex]);
 
-    let handleJoinVideoCall = async (e) => {
+    let handleJoinVideoCall = (e) => {
         if (e) e.preventDefault();
-        if (!meetingCode.trim()) return;
+        const code = meetingCode.trim();
+        if (!code) return;
+
+        // Saving the room to history is a side effect of joining, not a
+        // precondition for it. Awaiting it here meant that for a SIGNED-IN user
+        // the button did nothing until the request came back — and with no
+        // axios timeout, a sleeping backend (a free Render instance takes
+        // ~30-60s to wake) left it hanging indefinitely. A guest never hit this
+        // because the guest path skips the call entirely, which is why joining
+        // only looked broken once you signed in.
+        //
+        // The request is already in flight when we navigate, and a client-side
+        // route change does not unload the page, so it still completes.
         if (isTokenValid() && addToUserHistory) {
-            try {
-                await addToUserHistory(meetingCode.trim());
-            } catch (err) {
-                console.log("Error saving history:", err);
-            }
+            addToUserHistory(code).catch((err) => console.log("Error saving history:", err));
         }
-        navigate(`/${meetingCode.trim()}`);
+        navigate(`/${code}`);
     };
 
     return (

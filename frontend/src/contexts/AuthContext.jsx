@@ -9,7 +9,11 @@ import { clearToken, getToken, setToken } from "../utils/token";
 export const AuthContext = createContext({});
 
 const client = axios.create({
-    baseURL: `${server}/api/v1/users`
+    baseURL: `${server}/api/v1/users`,
+    // axios defaults to 0, i.e. wait forever. A sleeping free-tier backend then
+    // leaves the UI stuck with no error to react to and no way to recover.
+    // 60s is generous enough to survive a cold start but still bounded.
+    timeout: 60000
 })
 
 // Attach the JWT to every outgoing request in one place, so no call site has
